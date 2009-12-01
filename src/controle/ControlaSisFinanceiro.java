@@ -1,0 +1,121 @@
+package controle;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JFrame;
+
+import modelo.Despesa;
+import visao.CadastroDespesaUsuarioPeriodoTela;
+import visao.CadastroReceitaUsuarioPeriodoTela;
+import visao.DespesaTela;
+import visao.LoginTela;
+import visao.ReceitaTela;
+import visao.RelatorioSimplesMensalDespesaReceitaTela;
+import visao.SobreTela;
+import visao.TelaPrincipalSisFinanceiro;
+import visao.TrocarPeriodoTela;
+import visao.UsuarioCadastroTela;
+import dao.DespesaDao;
+
+public class ControlaSisFinanceiro implements ActionListener {
+	
+	TelaPrincipalSisFinanceiro vc;
+	
+	LoginTela lt;
+
+	private static ControlaSisFinanceiro singleton=null;
+	
+	public static ControlaSisFinanceiro getInstance(){
+		if(singleton==null){
+			singleton= new ControlaSisFinanceiro();
+		}
+			return singleton;
+	}
+		
+	private ControlaSisFinanceiro() {
+	}
+	
+	public void configuraTela(TelaPrincipalSisFinanceiro vc){
+		//logger.isDebugEnabled();
+		this.vc=vc;
+		vc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		vc.configuraOuvinte(this);	
+		vc.setResizable(false);
+		vc.setLocationRelativeTo(null);
+	}
+		
+	public void habilita(){
+		vc.setVisible(true);
+	}
+			
+
+
+	public void actionPerformed(ActionEvent eve) {
+		// TODO Auto-generated method stub
+
+		String comando = eve.getActionCommand();
+		
+		if(comando.equals(("tabelaDespesas")))
+		{
+			DespesaTela visao =new DespesaTela();
+			DespesaControle.getInstance().configuraTela(visao);
+			List<Despesa> despesas =  DespesaDao.getInstance().listar();
+			visao.carregaAreaDespesas(despesas);
+			DespesaControle.getInstance().habilita();
+			
+		}
+		else if(comando.equals("tabelaReceitas"))
+		{
+			ReceitaTela visao =new ReceitaTela();
+			ReceitaControle.getInstance().configuraTela(visao); 
+			ReceitaControle.getInstance().habilita();
+			
+		}
+		else if(comando.equals("tabelaPeriodos"))
+		{
+			
+		}
+		else if(comando.equals("dadosUsuario")){
+			
+			UsuarioCadastroTela visao =new UsuarioCadastroTela();
+			DadosControle.getInstance().configuraTela(visao); 
+			DadosControle.getInstance().habilita();
+		}
+		else if(comando.equals("trocarPeriodo")){
+			
+			TrocarPeriodoTela visao = new TrocarPeriodoTela();
+			PeriodoTelaControle.getInstance().configuraTela(visao); 
+			PeriodoTelaControle.getInstance().habilita();
+		}
+		else if(comando.equals("estatisticas")){
+			
+			RelatorioSimplesMensalDespesaReceitaTela rel = new RelatorioSimplesMensalDespesaReceitaTela();
+			RelatorioFinanceiroControle.getInstance().configuraTela(rel);
+			RelatorioFinanceiroControle.getInstance().habilita();
+			
+		}
+		else if(comando.equals("despesasUsuario")){
+			
+			CadastroDespesaUsuarioPeriodoTela visao = new CadastroDespesaUsuarioPeriodoTela();
+			DespesaUsuarioPeriodoControle.getInstance().configuraTela(visao);
+			DespesaUsuarioPeriodoControle.getInstance().habilita();
+		}
+		else if(comando.equals("receitasUsuario")){
+			
+			CadastroReceitaUsuarioPeriodoTela visao = new CadastroReceitaUsuarioPeriodoTela();
+			ReceitaUsuarioPeriodoControle.getInstance().configuraTela(visao);
+			ReceitaUsuarioPeriodoControle.getInstance().habilita();
+		}
+		else if(comando.equals("sobre")){
+			
+			SobreTela visao = new SobreTela();
+			SobreControle.getInstance().configuraTela(visao);
+			SobreControle.getInstance().habilita();
+			
+		}
+	}
+	
+	
+}

@@ -1,0 +1,16 @@
+java -classpath ./lib/hsqldb.jar org.hsqldb.util.DatabaseManager
+
+java -classpath ./lib/hsqldb.jar org.hsqldb.Server -database.0 sisFinanceiro -dbname.0 sisFinanceiro
+
+URL do Banco
+
+jdbc:hsqldb:hsql://localhost/sisFinanceiro
+
+
+Para startar o banco vá para o diretório onde está o hsqldb.jar e execute:
+
+java -cp hsqldb.jar org.hsqldb.Server -database.0 nomeDoBanco -dbname.0 xdb
+
+Se o banco não existir ele cria.
+
+depois vc usa aquela interface grafica dele para gerar as tabelas, na url do banco vc coloca: "jdbc:hsqldb:file:path_para_banco"

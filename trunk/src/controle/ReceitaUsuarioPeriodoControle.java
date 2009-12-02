@@ -2,8 +2,12 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
+
+import modelo.Periodo;
+import modelo.Receita;
 
 import visao.CadastroReceitaUsuarioPeriodoTela;
 
@@ -51,6 +55,18 @@ public class ReceitaUsuarioPeriodoControle implements ActionListener {
 		{
 			
 		}
+	}
+
+	public void populaComboReceitas(List<Receita> receita) {
+		
+			vc.populaComboReceitas(receita);
+		
+	}
+
+	public void populaComboPeriodo(Periodo p) {
+		
+		vc.populaComboPeriodo(p);
+		
 	}
 
 }

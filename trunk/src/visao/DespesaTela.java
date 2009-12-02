@@ -102,6 +102,8 @@ public class DespesaTela extends JFrame {
 	private void desabilitaBotao() {
 		excluirJButton.setEnabled(false);
 	}
+	
+	
 
 	/**
 	 * This method initializes jTextAreaDespesa	
@@ -160,7 +162,7 @@ public class DespesaTela extends JFrame {
 		if (cadastrarDespesa == null) {
 			cadastrarDespesa = new JButton();
 			cadastrarDespesa.setBounds(new Rectangle(373, 42, 135, 35));
-			cadastrarDespesa.setText("nova Despesa");
+			cadastrarDespesa.setText("confirmar");
 		}
 		return cadastrarDespesa;
 	}
@@ -174,7 +176,7 @@ public class DespesaTela extends JFrame {
 		if (alterarDespesa == null) {
 			alterarDespesa = new JButton();
 			alterarDespesa.setBounds(new Rectangle(374, 96, 135, 36));
-			alterarDespesa.setText("alterar Despesa");
+			alterarDespesa.setText("edição");
 		}
 		return alterarDespesa;
 	}
@@ -186,11 +188,12 @@ public class DespesaTela extends JFrame {
 	public void configuraOuvinte(ActionListener controle){
 			
 			alterarDespesa.addActionListener(controle);
-			alterarDespesa.setActionCommand("alterarDespesa");
-			alterarDespesa.setActionCommand("confirmarAlteracao");
+			alterarDespesa.setActionCommand("edicao");
 			cadastrarDespesa.addActionListener(controle);
-			cadastrarDespesa.setActionCommand("cadastrarDespesa");
-		
+			cadastrarDespesa.setActionCommand("confirmar");
+			excluirJButton.addActionListener(controle);
+			excluirJButton.setActionCommand("excluir");
+			
 	}
 
 	public void carregaAreaDespesas(List<Despesa> despesas) {
@@ -204,7 +207,7 @@ public class DespesaTela extends JFrame {
 		
 	}
 
-	public Despesa leDadosTela() {
+	public Despesa leDadosTelaCadastro() {
 		String fixaOuVariavel = "";
 		
 		//Antes de ler os dados, analisa se estao preenchidos o nome
@@ -260,7 +263,7 @@ public class DespesaTela extends JFrame {
 		if (excluirJButton == null) {
 			excluirJButton = new JButton();
 			excluirJButton.setBounds(new Rectangle(375, 148, 133, 37));
-			excluirJButton.setText("Excluir Despesa");
+			excluirJButton.setText("excluir");
 		}
 		return excluirJButton;
 	}

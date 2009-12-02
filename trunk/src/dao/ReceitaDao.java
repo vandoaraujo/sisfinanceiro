@@ -63,7 +63,7 @@ public class ReceitaDao {
 	    }
 
 	    public List<Receita> listar() {
-			List<Receita> l = session.createQuery("from modelo.Receita").list();
+			List<Receita> l = session.createQuery("from modelo.Receita order by nomereceita").list();
 			return l;
 	    }
 

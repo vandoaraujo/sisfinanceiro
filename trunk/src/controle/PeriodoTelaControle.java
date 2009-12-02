@@ -5,11 +5,15 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import modelo.Periodo;
 import visao.TrocarPeriodoTela;
 import dao.PeriodoDao;
 
 public class PeriodoTelaControle implements ActionListener {
+	
+	Logger log = Logger.getLogger(PeriodoTelaControle.class);
 
 	TrocarPeriodoTela vc;
 	
@@ -78,8 +82,14 @@ public class PeriodoTelaControle implements ActionListener {
 			Periodo p = vc.leComboTrocandoPeriodo();
 			//Define o período que o usuário selecionou
 			periodoAtualSelecionado = p;
+			log.info("Ano após ajuste " + periodoAtualSelecionado.getAno());
+			log.info("Mês após ajuste " + periodoAtualSelecionado.getMes());
 			
 		}
+	}
+
+	public static Periodo getPeriodoAtualSelecionado() {
+		return periodoAtualSelecionado;
 	}
 
 }

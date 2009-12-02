@@ -64,7 +64,7 @@ public class PeriodoDao {
 	    }
 
 	    public List<Periodo> listar() {
-			List<Periodo> l = session.createQuery("from modelo.Periodo").list();
+			List<Periodo> l = session.createQuery("from modelo.Periodo order by ano, mes").list();
 			return l;
 	    }
 

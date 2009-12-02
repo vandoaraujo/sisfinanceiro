@@ -26,7 +26,7 @@ public class DespesaDao {
 	    public void atualizar(Despesa despesa) {
 
 			Transaction t = session.beginTransaction();
-			session.update(despesa);
+			session.merge(despesa);
 			t.commit();
 			session.flush();
 			session.close();
@@ -41,9 +41,9 @@ public class DespesaDao {
 			return despesa;
 		}
 
-	    public Despesa BuscaDespesaId(Integer id) {
-
-	    	Despesa d = (Despesa) session.load(Despesa.class, id);
+	    public Despesa BuscaDespesaId(Integer codigo) throws Exception {
+	    	
+	    	Despesa d = (Despesa) session.load(Despesa.class, codigo);
 	    	return d;
 	    }
 

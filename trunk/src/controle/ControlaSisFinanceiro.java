@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import modelo.Despesa;
+import modelo.Periodo;
 import visao.CadastroDespesaUsuarioPeriodoTela;
 import visao.CadastroReceitaUsuarioPeriodoTela;
 import visao.DespesaTela;
@@ -18,6 +19,7 @@ import visao.TelaPrincipalSisFinanceiro;
 import visao.TrocarPeriodoTela;
 import visao.UsuarioCadastroTela;
 import dao.DespesaDao;
+import dao.PeriodoDao;
 
 public class ControlaSisFinanceiro implements ActionListener {
 	
@@ -86,7 +88,9 @@ public class ControlaSisFinanceiro implements ActionListener {
 		else if(comando.equals("trocarPeriodo")){
 			
 			TrocarPeriodoTela visao = new TrocarPeriodoTela();
-			PeriodoTelaControle.getInstance().configuraTela(visao); 
+			PeriodoTelaControle.getInstance().configuraTela(visao);
+			List<Periodo> p = PeriodoDao.getInstance().listar();
+			PeriodoTelaControle.getInstance().populaComboVista(p);
 			PeriodoTelaControle.getInstance().habilita();
 		}
 		else if(comando.equals("estatisticas")){

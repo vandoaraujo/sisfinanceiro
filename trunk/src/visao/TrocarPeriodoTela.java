@@ -1,16 +1,16 @@
 package visao;
 
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import java.awt.Dimension;
-import javax.swing.JComboBox;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JEditorPane;
+import javax.swing.JPanel;
+
+import modelo.Periodo;
 
 public class TrocarPeriodoTela extends JFrame {
 
@@ -86,8 +86,27 @@ public class TrocarPeriodoTela extends JFrame {
 	
 	public void configuraOuvinte(ActionListener controle){
 		trocarPeriodoBotao.addActionListener(controle);
-		trocarPeriodoBotao.setActionCommand("cadastrar");
+		trocarPeriodoBotao.setActionCommand("trocarPeriodoCorrente");
 				
+	}
+	
+	public void populaComboPeriodos(List<Periodo> periodo){
+		for(Periodo p : periodo){
+			periodoCombo.setToolTipText(p.getMes() + " - " +  p.getAno());
+		}
+		
+	}
+	
+	public Periodo leComboTrocandoPeriodo(){
+		String periodoAno = periodoCombo.getToolTipText();
+		
+		String periodoAnoAjustado [] = periodoAno.split(" - ");
+		String mes = periodoAnoAjustado[0];
+		String ano = periodoAnoAjustado[1];
+		Periodo p = new Periodo();
+		p.setMes(Integer.valueOf(mes));
+		p.setAno(Integer.valueOf(ano));
+		return p;
 	}
 	
 	/*public Usuario leDadosUsuario(){

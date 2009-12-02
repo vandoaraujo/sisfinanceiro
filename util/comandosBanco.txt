@@ -14,3 +14,71 @@ java -cp hsqldb.jar org.hsqldb.Server -database.0 nomeDoBanco -dbname.0 xdb
 Se o banco não existir ele cria.
 
 depois vc usa aquela interface grafica dele para gerar as tabelas, na url do banco vc coloca: "jdbc:hsqldb:file:path_para_banco"
+
+
+
+
+INSERT INTO despesa VALUES (1, false, 'Luz');
+INSERT INTO despesa VALUES (2, false,'Telefone Fixo');
+INSERT INTO despesa VALUES (3, true, 'Empregada');
+INSERT INTO despesa VALUES (4, false, 'Cartão de Crédito');
+INSERT INTO despesa VALUES (5, false, 'Despesas Bancárias');
+INSERT INTO despesa VALUES (6, true, 'Transporte escolar');
+INSERT INTO despesa VALUES (7, true, 'Condominio');
+INSERT INTO despesa VALUES (8, true, 'Tv a cabo');
+INSERT INTO despesa VALUES (9, true, 'Internet');
+INSERT INTO despesa VALUES (10, true, 'Academia');
+INSERT INTO despesa VALUES (11, false, 'Supermercado');
+INSERT INTO despesa VALUES (12, true, 'Contador');
+INSERT INTO despesa VALUES (13, false, 'Impostos Gerais');
+INSERT INTO despesa VALUES (14, false, 'Despesas Médicas');
+INSERT INTO despesa VALUES (15, true, 'Escola');
+INSERT INTO despesa VALUES (16, true, 'Faculdade');
+
+INSERT INTO despesa VALUES (17, false, 'Agua');
+
+INSERT INTO despesa VALUES (18, false, 'Celular');
+
+INSERT INTO despesa VALUES (19, false, 'IPVA');
+
+INSERT INTO despesa VALUES (20, false, 'IPTU');
+
+INSERT INTO despesa VALUES (21, false, 'Transporte - Condução');
+
+RECEITAS
+
+INSERT INTO receita VALUES (1, ' Salário1');
+INSERT INTO receita VALUES (2, ' Salário2');
+INSERT INTO receita VALUES (3, ' Gratificação');
+INSERT INTO receita VALUES (4, ' Bonificação');
+INSERT INTO receita VALUES (5, ' 13º');
+INSERT INTO receita values (6,'Doação');
+INSERT INTO receita values (7,'Venda');
+INSERT INTO receita values (8,'Lucros');
+INSERT INTO receita values (9,'Ações');
+
+PERIODO
+
+insert into periodo values (null, 2009, 1);
+
+insert into periodo values (null, 2009, 2);
+
+insert into periodo values (null, 2009, 3);
+
+insert into periodo values (null, 2009, 4);
+
+insert into periodo values (null, 2009, 5);
+
+insert into periodo values (null, 2009, 6);
+
+insert into periodo values (null, 2009, 7);
+
+insert into periodo values (null, 2009, 8);
+
+insert into periodo values (null, 2009, 9);
+
+insert into periodo values (null, 2009, 10);
+
+insert into periodo values (null, 2009, 11);
+
+insert into periodo values (null, 2009, 12);

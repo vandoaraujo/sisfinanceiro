@@ -14,6 +14,7 @@ import dao.DespesaDao;
 public class DespesaControle implements ActionListener {
 	
 	DespesaTela vc;
+	Despesa despesaCorrente = null;
 	
 	private static DespesaControle singleton=null;
 	
@@ -47,27 +48,97 @@ public class DespesaControle implements ActionListener {
 
 		String comando = eve.getActionCommand();
 		
-		if(comando.equals(("alterarDespesa")))
+		if(comando.equals(("edicao")))
 		{
-			int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, null, "Digite o codigo da Despesa"));
-			Despesa d = DespesaDao.getInstance().BuscaDespesaId(codigo);
-			vc.populaCamposObjetoBanco(d);
+			despesaCorrente = alteraDespesa();
 		}
-		else if(comando.equals("cadastrarDespesa"))
+		else if(comando.equals("confirmar"))
 		{
-			Despesa d = vc.leDadosTela();
-			DespesaDao.getInstance().salvar(d);
-			vc.limpaDespesasArea();
-			List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
-			vc.carregaAreaDespesas(novasDespesas);
-		}
-		
-		else if(comando.equals("confirmarAlteracao")){
-			Despesa d = vc.leDadosTela();
-			DespesaDao.getInstance().atualizar(d);
-			JOptionPane.showMessageDialog(null,"ATUALIZADO COM SUCESSO");
+			//Para o caso de salvar
+			if(despesaCorrente == null){
+				
+				Despesa d = vc.leDadosTelaCadastro();
+				DespesaDao.getInstance().salvar(d);
+				vc.limpaDespesasArea();
+				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
+				vc.carregaAreaDespesas(novasDespesas);
+			}
+			//Para o caso de atualizar
+			else{
+				
+				//Analisa se houve mudança de nome ou fixo
+				//analisaMudancaObjetoDespesa(despesaCorrente);
+				DespesaDao.getInstance().atualizar(despesaCorrente);
+				vc.limpaDespesasArea();
+				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
+				vc.carregaAreaDespesas(novasDespesas);
+				despesaCorrente = null;
+			}
 			
 		}
+		
+		else if(comando.equals("excluir")){
+			
+			if(despesaCorrente != null){
+				DespesaDao.getInstance().deletar(despesaCorrente);
+				vc.limpaDespesasArea();
+				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
+				vc.carregaAreaDespesas(novasDespesas);
+				JOptionPane.showMessageDialog(null,"Deletado com sucesso");
+				
+			}
+				despesaCorrente = null;
+		}
+
+	}
+
+	private void analisaMudancaObjetoDespesa(Despesa d) {
+		Despesa despesaTela = vc.leDadosTelaCadastro();
+		if(despesaTela.getNomeDespesa().equals(d.getNomeDespesa()) || 
+				(despesaTela.isDespesaFixa() == d.isDespesaFixa())) {
+			
+		}
+		
+	}
+
+	private Despesa alteraDespesa() {
+		
+		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o codigo da Despesa"));
+		Despesa d = null;
+		try {
+			d = DespesaDao.getInstance().BuscaDespesaId(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		vc.populaCamposObjetoBanco(d);
+		
+		return d;
+		
+	}
+	
+	private Despesa excluirDespesa() {
+		
+		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o codigo da Despesa"));
+		Despesa d = null;
+		try {
+			d = DespesaDao.getInstance().BuscaDespesaId(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		vc.populaCamposObjetoBanco(d);
+		
+		return d;
+		
+	}
+
+	public Despesa getDespesaCorrente() {
+		return despesaCorrente;
+	}
+
+	public void setDespesaCorrente(Despesa despesaCorrente) {
+		this.despesaCorrente = despesaCorrente;
 	}
 	
 	

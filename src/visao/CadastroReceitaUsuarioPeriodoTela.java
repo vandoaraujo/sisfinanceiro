@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -15,15 +16,19 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+import modelo.Periodo;
+import modelo.Receita;
 import modelo.Usuario;
 
 public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
+	
+	
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
 	private JTextArea areaTex = null;
 	private JTextField valorText = null;
-	private JComboBox despesaCombo = null;
+	private JComboBox receitaCombo = null;
 	private JButton okCadastro = null;
 	private JLabel despesaLabel = null;
 	private JLabel valorLabel = null;
@@ -118,11 +123,11 @@ public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 	 * @return javax.swing.JComboBox	
 	 */
 	private JComboBox getDespesaCombo() {
-		if (despesaCombo == null) {
-			despesaCombo = new JComboBox();
-			despesaCombo.setBounds(new Rectangle(152, 18, 270, 29));
+		if (receitaCombo == null) {
+			receitaCombo = new JComboBox();
+			receitaCombo.setBounds(new Rectangle(152, 18, 270, 29));
 		}
-		return despesaCombo;
+		return receitaCombo;
 	}
 
 	/**
@@ -194,6 +199,19 @@ public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 	
 	public void modofechado(){
 		this.setVisible(false);
+	}
+	
+	public void populaComboReceitas(List<Receita> receita) {
+		
+		for(Receita r : receita){
+			receitaCombo.addItem(r.getNomeReceita());
+		}
+		
+	}
+
+	public void populaComboPeriodo(Periodo p) {
+		periodoCombo.addItem(p.getMes() + " - " +  p.getAno());
+		
 	}
 	
 

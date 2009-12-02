@@ -76,6 +76,8 @@ public class PeriodoTelaControle implements ActionListener {
 		}
 		else if(comando.equals("trocarPeriodoCorrente")){
 			Periodo p = vc.leComboTrocandoPeriodo();
+			//Define o período que o usuário selecionou
+			periodoAtualSelecionado = p;
 			
 		}
 	}

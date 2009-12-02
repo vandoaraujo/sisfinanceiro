@@ -91,14 +91,15 @@ public class TrocarPeriodoTela extends JFrame {
 	}
 	
 	public void populaComboPeriodos(List<Periodo> periodo){
+		
 		for(Periodo p : periodo){
-			periodoCombo.setToolTipText(p.getMes() + " - " +  p.getAno());
+			periodoCombo.addItem(p.getMes() + " - " +  p.getAno());
 		}
 		
 	}
 	
 	public Periodo leComboTrocandoPeriodo(){
-		String periodoAno = periodoCombo.getToolTipText();
+		String periodoAno = (String) periodoCombo.getSelectedItem();
 		
 		String periodoAnoAjustado [] = periodoAno.split(" - ");
 		String mes = periodoAnoAjustado[0];

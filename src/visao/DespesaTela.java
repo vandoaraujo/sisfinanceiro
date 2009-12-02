@@ -233,6 +233,29 @@ public class DespesaTela extends JFrame {
 			return null;
 			
 	}
+	
+	public void leDadosTelaCadastro(Despesa d){
+		
+		String fixaOuVariavel = "";
+		
+		//Antes de ler os dados, analisa se estao preenchidos o nome
+		if(dadosObrigatorios()){
+			
+			String nomeDespesa = jTextFieldNovaDespesa.getText();
+			boolean fixa = false;
+			fixaOuVariavel = fixaJCheckBox.getText();
+			
+			if(!fixaOuVariavel.equals("")){
+			
+				fixa = true;
+			}
+			d.setNomeDespesa(nomeDespesa);
+			d.setDespesaFixa(fixa);
+		
+		}else{
+				JOptionPane.showMessageDialog(null, "Dados obrigatorios nao preenchidos!");
+		}
+	}
 
 	private boolean dadosObrigatorios() {
 		String nomeDespesa = jTextFieldNovaDespesa.getText();

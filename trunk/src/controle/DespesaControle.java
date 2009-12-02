@@ -66,8 +66,7 @@ public class DespesaControle implements ActionListener {
 			//Para o caso de atualizar
 			else{
 				
-				//Analisa se houve mudança de nome ou fixo
-				//analisaMudancaObjetoDespesa(despesaCorrente);
+				vc.leDadosTelaCadastro(despesaCorrente);
 				DespesaDao.getInstance().atualizar(despesaCorrente);
 				vc.limpaDespesasArea();
 				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
@@ -117,22 +116,6 @@ public class DespesaControle implements ActionListener {
 		
 	}
 	
-	private Despesa excluirDespesa() {
-		
-		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o codigo da Despesa"));
-		Despesa d = null;
-		try {
-			d = DespesaDao.getInstance().BuscaDespesaId(codigo);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		vc.populaCamposObjetoBanco(d);
-		
-		return d;
-		
-	}
-
 	public Despesa getDespesaCorrente() {
 		return despesaCorrente;
 	}

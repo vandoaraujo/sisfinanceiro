@@ -7,7 +7,10 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -15,10 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-
 import modelo.Periodo;
 import modelo.Receita;
-import modelo.Usuario;
 
 public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 	
@@ -179,23 +180,21 @@ public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 		
 	}
 	
-	/*public Usuario leDadosUsuario(){
+	public void leDadosUsuario(Double valorReceita, String receitaEscolhida, String periodo,String infoArea){
 		try{
-			String nomeUsuario= nome.getText();
+			valorReceita= Double.parseDouble(valorText.getText());
 			
-			String loginUsuario=login.getText();
+			receitaEscolhida=(String)receitaCombo.getSelectedItem();
 			
-			String senhaUsu=new String(senha.getPassword());
+			periodo=(String)periodoCombo.getSelectedItem();
+					
+			infoArea= areaTex.getText();
 			
-			Usuario usuario=new Usuario(nomeUsuario,loginUsuario,senhaUsu,new Date());
-			
-			return usuario;
 		}
 		catch(Exception e){
 			JOptionPane.showMessageDialog(null, "Dados invalidos!");
 		}
-		return null;
-	}*/
+	}
 	
 	public void modofechado(){
 		this.setVisible(false);

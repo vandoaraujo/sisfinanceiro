@@ -18,7 +18,7 @@ public class ReceitaUsuarioPeriodoPK {
     
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
-    private Periodo usuario_id;
+    private Usuario usuario_id;
     
 	public Receita getReceita_id() {
 		return receita_id;
@@ -36,11 +36,11 @@ public class ReceitaUsuarioPeriodoPK {
 		this.periodo_id = periodo_id;
 	}
 
-	public Periodo getUsuario_id() {
+	public Usuario getUsuario_id() {
 		return usuario_id;
 	}
 
-	public void setUsuario_id(Periodo usuario_id) {
+	public void setUsuario_id(Usuario usuario_id) {
 		this.usuario_id = usuario_id;
 	}
 

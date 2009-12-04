@@ -1,7 +1,10 @@
 package dao;
 
+import modelo.ReceitaUsuarioPeriodo;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class ReceitaPertenceUsuarioEmPeriodoDao {
 	
@@ -17,5 +20,16 @@ public class ReceitaPertenceUsuarioEmPeriodoDao {
     private ReceitaPertenceUsuarioEmPeriodoDao() {
     	session = HibernateUtil.getInstance().AbreUmaSession();
     }
+    
+    public void salvar(ReceitaUsuarioPeriodo receitaUsuarioPeriodo) {
+
+    	Transaction t = session.beginTransaction();
+    	session.save(receitaUsuarioPeriodo);
+    	t.commit();
+    	session.flush();
+    	session.close();
+
+    }
+
 
 }

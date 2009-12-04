@@ -34,12 +34,21 @@ public class ReceitaDao {
 			logger.info("ATUALIZADO");
 	    }
 	    
-	    public List<Receita> buscarReceitaNome(String nome) {
+	    public List<Receita> buscarReceitasNome(String nome) {
 
 			List<Receita> Receita = session.createCriteria(Receita.class).add(
 				Restrictions.sqlRestriction("nome like '" + nome
 					+ "%'")).list();
 			return Receita;
+		}
+	    
+	    
+	    public Receita buscarReceitaNome(String nome) {
+
+			 Receita r = (Receita) session.createCriteria(Receita.class).add(
+				Restrictions.sqlRestriction("nomereceita like '" + nome
+					+ "%'")).uniqueResult();
+			return r;
 		}
 
 	    public Receita BuscaReceitaId(Integer id) {

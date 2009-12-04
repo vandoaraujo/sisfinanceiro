@@ -19,7 +19,7 @@ public class ReceitaUsuarioPeriodo {
     
     private String informacao;
     
-	private double valor;
+	private Double valor;
     
     public int getId() {
 		return idReceitaUsuarioPeriodo;
@@ -37,11 +37,11 @@ public class ReceitaUsuarioPeriodo {
 		this.chaveComposta = chaveComposta;
 	}
 
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
 
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 

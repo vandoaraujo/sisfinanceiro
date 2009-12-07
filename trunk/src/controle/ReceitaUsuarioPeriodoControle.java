@@ -9,6 +9,7 @@ import modelo.Receita;
 import modelo.ReceitaUsuarioPeriodo;
 import modelo.ReceitaUsuarioPeriodoPK;
 import modelo.Usuario;
+import util.UsuarioPeriodoReceitaTO;
 import visao.CadastroReceitaUsuarioPeriodoTela;
 import dao.PeriodoDao;
 import dao.ReceitaDao;
@@ -49,19 +50,18 @@ public class ReceitaUsuarioPeriodoControle implements ActionListener {
 	public void actionPerformed(ActionEvent eve) {
 		// TODO Auto-generated method stub
 		
-		String receitaEscolhida = null,infoArea = null, periodo = null;
-		Double valorReceita = null;
 		
 		String comando = eve.getActionCommand();
 		
 		if(comando.equals(("cadastrar")))
 		{
 			Usuario usuarioIntance = UsuarioDao.getUsuarioLogado();
-			vc.leDadosUsuario(valorReceita, receitaEscolhida, periodo, infoArea);
 			
-			Receita rec = (Receita) ReceitaDao.getInstance().buscarReceitaNome(receitaEscolhida);
+			UsuarioPeriodoReceitaTO toReceita = vc.leDadosUsuario();
 			
-			Periodo p =formataComboPeriodo(periodo);
+			Receita rec = (Receita) ReceitaDao.getInstance().buscarReceitaNome(toReceita.getReceita());
+			
+			Periodo p =formataComboPeriodo(toReceita.getPeriodo());
 			
 			ReceitaUsuarioPeriodoPK rPK = new ReceitaUsuarioPeriodoPK();
 			rPK.setPeriodo_id(p);
@@ -70,8 +70,8 @@ public class ReceitaUsuarioPeriodoControle implements ActionListener {
 			
 			ReceitaUsuarioPeriodo rUP = new ReceitaUsuarioPeriodo();
 			rUP.setChaveComposta(rPK);
-			rUP.setInformacao(infoArea);
-			rUP.setValor(valorReceita);
+			rUP.setInformacao(toReceita.getInfoArea());
+			rUP.setValor(toReceita.getValorReceita());
 			
 			ReceitaPertenceUsuarioEmPeriodoDao.getInstance().salvar(rUP);
 			
@@ -99,6 +99,7 @@ public class ReceitaUsuarioPeriodoControle implements ActionListener {
 	private Periodo formataComboPeriodo(String periodo){
 		
 		String periodoAnoAjustado [] = periodo.split(" - ");
+		
 		String mes = periodoAnoAjustado[0];
 		String ano = periodoAnoAjustado[1];
 		//Busca no banco de dados

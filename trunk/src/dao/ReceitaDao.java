@@ -3,7 +3,6 @@ package dao;
 import java.util.List;
 
 import modelo.Receita;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,14 +41,14 @@ public class ReceitaDao {
 			return Receita;
 		}
 	    
-	    
 	    public Receita buscarReceitaNome(String nome) {
 
-			 Receita r = (Receita) session.createCriteria(Receita.class).add(
-				Restrictions.sqlRestriction("nomereceita like '" + nome
-					+ "%'")).uniqueResult();
-			return r;
-		}
+	    	Receita receita = (Receita) session.createQuery(
+	    		"from modelo.Receita r where r.nomeReceita=:nome").setString("nome", nome)
+	    		.uniqueResult();
+	    	return receita;
+
+	        }
 
 	    public Receita BuscaReceitaId(Integer id) {
 

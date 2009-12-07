@@ -3,6 +3,8 @@ package dao;
 import java.util.List;
 
 import modelo.Despesa;
+import modelo.Receita;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -33,13 +35,14 @@ public class DespesaDao {
 			logger.info("ATUALIZADO");
 	    }
 	    
-	    public List<Despesa> buscarDespesaNome(String nome) {
+	    public Despesa buscarDespesaNome(String nome) {
 
-			List<Despesa> despesa = session.createCriteria(Despesa.class).add(
-				Restrictions.sqlRestriction("nome like '" + nome
-					+ "%'")).list();
-			return despesa;
-		}
+	    	Despesa despesa = (Despesa) session.createQuery(
+	    		"from modelo.Despesa r where r.nomeDespesa=:nome").setString("nome", nome)
+	    		.uniqueResult();
+	    	return despesa;
+
+	    }
 
 	    public Despesa BuscaDespesaId(Integer codigo) throws Exception {
 	    	

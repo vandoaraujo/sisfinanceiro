@@ -1,0 +1,99 @@
+//Vando, e o campo Descrição da Despesa e Receita, não vai ter??? Coloquei!
+
+//Despesas:
+
+INSERT INTO DESPESAS (id, nome, despesaFixa, desc) //os campos pra servir de base...
+              VALUES (1, 'Aluguel', true,'***Descrição***');
+
+INSERT INTO DESPESAS VALUES (2, 'Prestação - Casa', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES (3, 'Condomínio', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES (4, 'Prestação - Carro', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(5, 'Seguro Automóvel', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(6, 'Seguro Vida', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(7, 'Previdência Privada', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(8, 'Assistência Funerária', true, '***Descrição***'); 
+
+INSERT INTO DESPESAS VALUES(9, 'Plano de Saúde', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(10, 'Plano Odontológico', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(11, 'IPVA', true, '***Descrição***'); 
+
+INSERT INTO DESPESAS VALUES(12, 'IPTU', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(13, 'Taxa de Incêndio - Bombeiro', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(14, 'Água', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(15, 'Energia Elétrica', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(16, 'Gás', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(17, 'Seguro Lar', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(18, 'Telefone Fixo', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(19, 'Telefone Celular', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(20, 'Cartão de Crédito', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(21, 'Cheque Especial/Débito Bancário', false, '***Descrição***' );
+
+INSERT INTO DESPESAS VALUES(22, 'Empregada Doméstica', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(23, 'Babá', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(24, 'Tv a Cabo', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(25, 'Internet', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(26, 'Lazer', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(27, 'Academia', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(28, 'Supermercado', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(29, 'Educação', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(30, 'Créche', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(31, 'Transporte', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(32, 'Vestuário', false, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(33, 'Cursos', true, '***Descrição***');
+
+INSERT INTO DESPESAS VALUES(34, 'Saúde', false, '***Descrição***');
+
+
+
+//Receitas;
+INSERT INTO RECEITAS (id, nome, desc) //os campos pra servir de base...
+              VALUES (1, 'Salário', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (2, 'Pensão Alimentícia', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (3, 'Aposentadoria', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (4, 'Gratificação', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (5, 'Bonificação', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (6, 'Comissão', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (7, 'PPL - Programa de Participação Lucros', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (8, 'PPR - Programa de Participação Resultados', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (9, 'Restituição IR', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (10, 'Extras', '***Descrição***');
+
+INSERT INTO RECEITAS VALUES (11, 'Décimo Terceiro', '***Descrição***');
+

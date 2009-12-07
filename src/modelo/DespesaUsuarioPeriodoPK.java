@@ -18,13 +18,13 @@ public class DespesaUsuarioPeriodoPK {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
-    private Periodo usuario_id;
+    private Usuario usuario_id;
 
-	public Periodo getUsuario_id() {
+	public Usuario getUsuario_id() {
 		return usuario_id;
 	}
 
-	public void setUsuario_id(Periodo usuario_id) {
+	public void setUsuario_id(Usuario usuario_id) {
 		this.usuario_id = usuario_id;
 	}
 

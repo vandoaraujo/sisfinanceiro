@@ -9,7 +9,7 @@ jdbc:hsqldb:hsql://localhost/sisFinanceiro
 
 Para startar o banco vá para o diretório onde está o hsqldb.jar e execute:
 
-java -cp hsqldb.jar org.hsqldb.Server -database.0 nomeDoBanco -dbname.0 xdb
+java -classpath ./lib/hsqldb.jar org.hsqldb.Server -database.0 sisFinanceiro -dbname.0 sisFinanceiro
 
 Se o banco não existir ele cria.
 
@@ -34,9 +34,7 @@ INSERT INTO despesa VALUES (13, false, 'Impostos Gerais');
 INSERT INTO despesa VALUES (14, false, 'Despesas Médicas');
 INSERT INTO despesa VALUES (15, true, 'Escola');
 INSERT INTO despesa VALUES (16, true, 'Faculdade');
-
 INSERT INTO despesa VALUES (17, false, 'Agua');
-
 INSERT INTO despesa VALUES (18, false, 'Celular');
 
 INSERT INTO despesa VALUES (19, false, 'IPVA');

@@ -89,7 +89,11 @@ public class PeriodoTelaControle implements ActionListener {
 	}
 
 	public static Periodo getPeriodoAtualSelecionado() {
-		return periodoAtualSelecionado;
+		
+		if(periodoAtualSelecionado != null)
+			return periodoAtualSelecionado;
+		else
+			return periodoAtualSelecionado = (Periodo) PeriodoDao.getInstance().listarUltimoPeriodo();
 	}
 
 }

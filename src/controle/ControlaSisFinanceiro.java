@@ -106,6 +106,10 @@ public class ControlaSisFinanceiro implements ActionListener {
 			
 			CadastroDespesaUsuarioPeriodoTela visao = new CadastroDespesaUsuarioPeriodoTela();
 			DespesaUsuarioPeriodoControle.getInstance().configuraTela(visao);
+			List<Despesa> despesa = DespesaDao.getInstance().listar();
+			DespesaUsuarioPeriodoControle.getInstance().populaComboDespesas(despesa);
+			Periodo p =PeriodoTelaControle.getInstance().getPeriodoAtualSelecionado();
+			DespesaUsuarioPeriodoControle.getInstance().populaComboPeriodo(p);
 			DespesaUsuarioPeriodoControle.getInstance().habilita();
 		}
 		else if(comando.equals("receitasUsuario")){

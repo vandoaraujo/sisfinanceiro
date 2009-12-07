@@ -1,25 +1,25 @@
 package visao;
 
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import java.awt.Dimension;
-import javax.swing.JLabel;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
+
 import modelo.Periodo;
 import modelo.Receita;
+import util.UsuarioPeriodoReceitaTO;
 
 public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 	
@@ -180,20 +180,61 @@ public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 		
 	}
 	
-	public void leDadosUsuario(Double valorReceita, String receitaEscolhida, String periodo,String infoArea){
+	public static double truncate(Double valor, int precisao) {
+
+		return Math.floor(valor * Math.pow(10, precisao))
+				/ Math.pow(10, precisao);
+
+	}
+	
+	public UsuarioPeriodoReceitaTO leDadosUsuario(){
 		try{
-			valorReceita= Double.parseDouble(valorText.getText());
+			System.out.println("Antes de ocorrer o null pointer");
 			
-			receitaEscolhida=(String)receitaCombo.getSelectedItem();
+			String valor = valorText.getText();
 			
-			periodo=(String)periodoCombo.getSelectedItem();
+			double valorReceita = Double.parseDouble(valor);
+			
+			//NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale ("pt", "BR"));   
+			//String s = nf.format (12345.67); // s recebe "R$ 12.345,67"  
+			//double d = nf.parse (valor).doubleValue(); // d recebe 12345.67*/
+			
+			/*BigDecimal soma;
+			soma = new BigDecimal(0.0);
+			soma.setScale(2, RoundingMode.FLOOR);
+			soma = soma.add(augend));*/
+			
+			//valorReceita = truncate(valorReceita, 2);
+			
+			System.out.println(valorReceita);
+			
+			String receitaEscolhida=(String)receitaCombo.getSelectedItem();
+			
+			System.out.println(receitaEscolhida);
+			
+			String periodo=(String)periodoCombo.getSelectedItem();
+			
+			System.out.println(periodo);
 					
-			infoArea= areaTex.getText();
+			String infoArea= areaTex.getText();
 			
+			System.out.println(infoArea);
+			
+			UsuarioPeriodoReceitaTO to = new UsuarioPeriodoReceitaTO(valorReceita,receitaEscolhida,periodo,infoArea);
+			
+			return to;
+			
+		}
+		catch(NumberFormatException e){
+			JOptionPane.showMessageDialog(null, "O campo valor aceita apenas valores numéricos no formato R$ 10.00");
+		}
+		catch(NullPointerException e){
+			JOptionPane.showMessageDialog(null, "O campo valor deve ser preenchido no formato R$ 0.00");
 		}
 		catch(Exception e){
-			JOptionPane.showMessageDialog(null, "Dados invalidos!");
+			JOptionPane.showMessageDialog(null, "Erro obtendo dados da tela!");
 		}
+			return null;
 	}
 	
 	public void modofechado(){

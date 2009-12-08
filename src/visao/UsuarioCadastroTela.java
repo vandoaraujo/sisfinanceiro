@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 
 import modelo.Usuario;
 
-
 public class UsuarioCadastroTela extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -27,7 +26,7 @@ public class UsuarioCadastroTela extends JFrame {
 
 	private JPasswordField senha = null;
 
-	private JTextField senhaNovamente = null;
+	private JPasswordField senhaNovamente = null;
 
 	private JLabel jLabelCodigo = null;
 
@@ -42,8 +41,8 @@ public class UsuarioCadastroTela extends JFrame {
 	private JButton retornar = null;
 
 	/**
-	 * This is the default constructor
-	 * public Dvd(int codigo,String titulo, String genero, int duracaomin)
+	 * This is the default constructor public Dvd(int codigo,String titulo,
+	 * String genero, int duracaomin)
 	 */
 	public UsuarioCadastroTela() {
 		super();
@@ -59,7 +58,7 @@ public class UsuarioCadastroTela extends JFrame {
 		this.setSize(527, 263);
 		this.setContentPane(getJContentPane());
 		this.setTitle("JFrame");
-		this.setLocation(400,350);
+		this.setLocation(400, 350);
 	}
 
 	/**
@@ -98,9 +97,9 @@ public class UsuarioCadastroTela extends JFrame {
 	}
 
 	/**
-	 * This method initializes codigo	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes codigo
+	 * 
+	 * @return javax.swing.JTextField
 	 */
 	private JTextField getCodigo() {
 		if (nome == null) {
@@ -111,9 +110,9 @@ public class UsuarioCadastroTela extends JFrame {
 	}
 
 	/**
-	 * This method initializes nome	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes nome
+	 * 
+	 * @return javax.swing.JTextField
 	 */
 	private JTextField getNome() {
 		if (login == null) {
@@ -124,9 +123,9 @@ public class UsuarioCadastroTela extends JFrame {
 	}
 
 	/**
-	 * This method initializes genero	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes genero
+	 * 
+	 * @return javax.swing.JTextField
 	 */
 	private JPasswordField getGenero() {
 		if (senha == null) {
@@ -137,22 +136,22 @@ public class UsuarioCadastroTela extends JFrame {
 	}
 
 	/**
-	 * This method initializes duracao	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes duracao
+	 * 
+	 * @return javax.swing.JTextField
 	 */
-	private JTextField getDuracao() {
+	private JPasswordField getDuracao() {
 		if (senhaNovamente == null) {
-			senhaNovamente = new JTextField();
+			senhaNovamente = new JPasswordField();
 			senhaNovamente.setBounds(new Rectangle(124, 137, 167, 23));
 		}
 		return senhaNovamente;
 	}
 
 	/**
-	 * This method initializes cadastrar	
-	 * 	
-	 * @return javax.swing.JButton	
+	 * This method initializes cadastrar
+	 * 
+	 * @return javax.swing.JButton
 	 */
 	private JButton getCadastrar() {
 		if (cadastrar == null) {
@@ -164,9 +163,9 @@ public class UsuarioCadastroTela extends JFrame {
 	}
 
 	/**
-	 * This method initializes retornar	
-	 * 	
-	 * @return javax.swing.JButton	
+	 * This method initializes retornar
+	 * 
+	 * @return javax.swing.JButton
 	 */
 	private JButton getRetornar() {
 		if (retornar == null) {
@@ -176,36 +175,42 @@ public class UsuarioCadastroTela extends JFrame {
 		}
 		return retornar;
 	}
-	
-	public void configuraOuvinte(ActionListener controle){
+
+	public void configuraOuvinte(ActionListener controle) {
 		cadastrar.addActionListener(controle);
 		cadastrar.setActionCommand("cadastrar");
 		retornar.addActionListener(controle);
 		retornar.setActionCommand("retornar");
+
+	}
+
+	public Usuario leDadosUsuario() {
+		//getText Depecated - implementar array de caracteres
+		Usuario usuario = null;
+		String nomeUsuario = nome.getText();
+		String loginUsuario = login.getText();
+		String senhaUsu = new String(senha.getPassword());
+		String confiSenha = new String (senhaNovamente.getPassword());
 		
-	}
-	
-	public Usuario leDadosUsuario(){
-		try{
-			String nomeUsuario= nome.getText();
-			
-			String loginUsuario=login.getText();
-			
-			String senhaUsu=new String(senha.getPassword());
-			
-			Usuario usuario=new Usuario(nomeUsuario,loginUsuario,senhaUsu,new Date());
-			
-			return usuario;
+		// validando os campos vazios e senhas difirentes
+		if (nomeUsuario.trim().equals("")
+				|| loginUsuario.trim().equals("")
+				|| senhaUsu.trim().equals("")
+				|| confiSenha.trim().equals("")){
+			return null;
+			//
+		}else if(!senhaUsu.equals(confiSenha)){
+			return new Usuario();
 		}
-		catch(Exception e){
-			JOptionPane.showMessageDialog(null, "Dados invalidos!");
+		
+		else {
+			usuario = new Usuario(nomeUsuario, loginUsuario, senhaUsu, new Date());
 		}
-		return null;
+		return usuario;
 	}
-	
-	public void modofechado(){
+
+	public void modofechado() {
 		this.setVisible(false);
 	}
 
-	
-}  //  @jve:decl-index=0:visual-constraint="177,6"
+} // @jve:decl-index=0:visual-constraint="177,6"

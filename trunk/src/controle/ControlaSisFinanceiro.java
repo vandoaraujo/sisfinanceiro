@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import modelo.Despesa;
 import modelo.Periodo;
 import modelo.Receita;
+import modelo.Usuario;
 import visao.CadastroDespesaUsuarioPeriodoTela;
 import visao.CadastroReceitaUsuarioPeriodoTela;
 import visao.DespesaTela;
@@ -22,6 +23,7 @@ import visao.UsuarioCadastroTela;
 import dao.DespesaDao;
 import dao.PeriodoDao;
 import dao.ReceitaDao;
+import dao.UsuarioDao;
 
 public class ControlaSisFinanceiro implements ActionListener {
 	
@@ -83,8 +85,9 @@ public class ControlaSisFinanceiro implements ActionListener {
 		}
 		else if(comando.equals("dadosUsuario")){
 			
-			UsuarioCadastroTela visao =new UsuarioCadastroTela();
-			DadosControle.getInstance().configuraTela(visao); 
+			UsuarioCadastroTela visao = new UsuarioCadastroTela();
+			DadosControle.getInstance().configuraTela(visao);
+			//UsuarioDao usuarioDao = UsuarioDao.getUsuarioLogado();
 			DadosControle.getInstance().habilita();
 		}
 		else if(comando.equals("trocarPeriodo")){

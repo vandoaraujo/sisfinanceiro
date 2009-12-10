@@ -5,19 +5,24 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.BatchSize;
+
 @Embeddable
 public class ReceitaUsuarioPeriodoPK {
 	
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "receita_id")
+    @BatchSize(size=16)
     private Receita receita_id;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "periodo_id")
+    @BatchSize(size=16)
     private Periodo periodo_id;
     
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
+    @BatchSize(size=16)
     private Usuario usuario_id;
     
 	public Receita getReceita_id() {

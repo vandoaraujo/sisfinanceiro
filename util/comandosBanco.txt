@@ -36,11 +36,8 @@ INSERT INTO despesa VALUES (15, true, 'Escola');
 INSERT INTO despesa VALUES (16, true, 'Faculdade');
 INSERT INTO despesa VALUES (17, false, 'Agua');
 INSERT INTO despesa VALUES (18, false, 'Celular');
-
 INSERT INTO despesa VALUES (19, false, 'IPVA');
-
 INSERT INTO despesa VALUES (20, false, 'IPTU');
-
 INSERT INTO despesa VALUES (21, false, 'Transporte - Condução');
 
 RECEITAS
@@ -58,25 +55,14 @@ INSERT INTO receita values (9,'Ações');
 PERIODO
 
 insert into periodo values (null, 2009, 1);
-
 insert into periodo values (null, 2009, 2);
-
 insert into periodo values (null, 2009, 3);
-
 insert into periodo values (null, 2009, 4);
-
 insert into periodo values (null, 2009, 5);
-
 insert into periodo values (null, 2009, 6);
-
 insert into periodo values (null, 2009, 7);
-
 insert into periodo values (null, 2009, 8);
-
 insert into periodo values (null, 2009, 9);
-
 insert into periodo values (null, 2009, 10);
-
 insert into periodo values (null, 2009, 11);
-
 insert into periodo values (null, 2009, 12);

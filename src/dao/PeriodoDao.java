@@ -2,6 +2,7 @@ package dao;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import modelo.DespesaUsuarioPeriodo;
 import modelo.Periodo;
@@ -108,7 +109,7 @@ public class PeriodoDao {
 		
 		public List<ReceitaUsuarioPeriodo> buscaReceitasPeriodo(Periodo p,Usuario usu) {
 
-	    	List<ReceitaUsuarioPeriodo> rec = session
+	    	List<ReceitaUsuarioPeriodo> rec =  session
     		.createQuery(
     			"from modelo.ReceitaUsuarioPeriodo d where d.chaveComposta.periodo_id=:idPeriodo and d.chaveComposta.usuario_id=:idUsuario")
     			.setInteger("idPeriodo", p.getId()).setInteger("idUsuario", usu.getId()).list();

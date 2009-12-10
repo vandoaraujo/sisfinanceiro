@@ -53,23 +53,7 @@ public class RelatorioFinanceiroControle implements ActionListener {
 		
 		if(comando.equals(("carregarRelatorio")))
 		{
-			Usuario usuarioInstance = UsuarioDao.getUsuarioLogado();
-			
-			Periodo p = vc.lePeriodo();
-			
-			List<DespesaUsuarioPeriodo> despesasUsuarioPeriodo = PeriodoDao.getInstance().buscaDespesasPeriodo(p,usuarioInstance);
-			
-			List<ReceitaUsuarioPeriodo> receitasUsuarioPeriodo = PeriodoDao.getInstance().buscaReceitasPeriodo(p,usuarioInstance);
-			
-			vc.carregaAreaDespesas(despesasUsuarioPeriodo);
-			vc.carregaAreaReceitas(receitasUsuarioPeriodo);
-			
-			double totalR = totalizaReceitas(receitasUsuarioPeriodo);
-			double totalD = totalizaDespesas(despesasUsuarioPeriodo);
-			
-			double valorFinal = calculaDiferenca(totalR,totalD);
-			
-			System.out.println("VALOR FINAL " + NumberUtil.truncate(2, valorFinal));
+			efetuaLogica(vc);
 			
 			//Periodo p =formataComboPeriodo(toReceita.getPeriodo());
 		}
@@ -79,6 +63,29 @@ public class RelatorioFinanceiroControle implements ActionListener {
 		}
 	}
 	
+	private void efetuaLogica(RelatorioSimplesMensalDespesaReceitaTela vc2) {
+		
+		Usuario usuarioInstance = UsuarioDao.getUsuarioLogado();
+		
+		Periodo p = vc.lePeriodo();
+		
+		List<DespesaUsuarioPeriodo> despesasUsuarioPeriodo = PeriodoDao.getInstance().buscaDespesasPeriodo(p,usuarioInstance);
+		
+		List<ReceitaUsuarioPeriodo> receitasUsuarioPeriodo = PeriodoDao.getInstance().buscaReceitasPeriodo(p,usuarioInstance);
+		
+		
+		double totalR = totalizaReceitas(receitasUsuarioPeriodo);
+		double totalD = totalizaDespesas(despesasUsuarioPeriodo);
+		double valorFinal = calculaDiferenca(totalR,totalD);
+		
+		vc.carregaAreaDespesas(despesasUsuarioPeriodo);
+		vc.carregaAreaReceitas(receitasUsuarioPeriodo);
+		vc.populaResultados(totalR, totalD, valorFinal);
+		
+		System.out.println("VALOR FINAL " + NumberUtil.truncate(2, valorFinal));
+		
+	}
+
 	private double calculaDiferenca(double totalR, double totalD) {
 		
 		BigDecimal subtracao;

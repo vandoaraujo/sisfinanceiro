@@ -3,6 +3,7 @@ package visao;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import modelo.Despesa;
 import modelo.DespesaUsuarioPeriodo;
 import modelo.Periodo;
 import modelo.ReceitaUsuarioPeriodo;
@@ -205,11 +205,12 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 		}
 		
 	}
-	
+
 	public void carregaAreaDespesas(List<DespesaUsuarioPeriodo> despesas) {
+		
 		StringBuilder s = new StringBuilder();
 		for(DespesaUsuarioPeriodo d: despesas){
-			s.append(d.getChaveComposta().getDespesa_id().getNomeDespesa() + "\t " +  d.getValor());
+			s.append(d.getChaveComposta().getDespesa_id().getNomeDespesa() + "\t " +  d.getValor() +  "\n");
 		}
 		
 		String st = s.toString();
@@ -218,9 +219,10 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 	}
 	
 	public void carregaAreaReceitas(List<ReceitaUsuarioPeriodo> receitas) {
+		
 		StringBuilder s = new StringBuilder();
 		for(ReceitaUsuarioPeriodo r: receitas){
-			s.append(r.getChaveComposta().getReceita_id().getNomeReceita() + "\t " +  r.getValor());
+			s.append(r.getChaveComposta().getReceita_id().getNomeReceita() + "\t " +  r.getValor() +  "\n");
 		}
 		
 		String st = s.toString();
@@ -230,6 +232,13 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 	
 	public void modofechado(){
 		this.setVisible(false);
+	}
+	
+	public void populaResultados(double totReceita, double totDespesa, double totSaldo){
+		
+		totalReceitas.setText(String.valueOf(totReceita));
+		totalDespesas .setText(String.valueOf(totDespesa));
+		saldoCampo.setText(String.valueOf(totSaldo));
 	}
 	
 	private Periodo formataComboPeriodo(String periodo){

@@ -1,17 +1,23 @@
 package visao;
 
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import java.awt.Dimension;
-import javax.swing.JComboBox;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JTextArea;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import modelo.Despesa;
+import modelo.DespesaUsuarioPeriodo;
+import modelo.Periodo;
+import modelo.ReceitaUsuarioPeriodo;
+import dao.PeriodoDao;
 
 public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 
@@ -178,26 +184,63 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 		
 	}
 	
-	/*public Usuario leDadosUsuario(){
+	public Periodo lePeriodo(){
 		try{
-			String nomeUsuario= nome.getText();
+			String periodo= (String)periodoCombo.getSelectedItem();
 			
-			String loginUsuario=login.getText();
-			
-			String senhaUsu=new String(senha.getPassword());
-			
-			Usuario usuario=new Usuario(nomeUsuario,loginUsuario,senhaUsu,new Date());
-			
-			return usuario;
+			Periodo p = formataComboPeriodo(periodo);
+									
+			return p;
 		}
 		catch(Exception e){
 			JOptionPane.showMessageDialog(null, "Dados invalidos!");
 		}
 		return null;
-	}*/
+	}
+	
+	public void populaComboPeriodos(List<Periodo> periodo){
+		
+		for(Periodo p : periodo){
+			periodoCombo.addItem(p.getMes() + " - " +  p.getAno());
+		}
+		
+	}
+	
+	public void carregaAreaDespesas(List<DespesaUsuarioPeriodo> despesas) {
+		StringBuilder s = new StringBuilder();
+		for(DespesaUsuarioPeriodo d: despesas){
+			s.append(d.getChaveComposta().getDespesa_id().getNomeDespesa() + "\t " +  d.getValor());
+		}
+		
+		String st = s.toString();
+		areaDespesas.append(st);
+		
+	}
+	
+	public void carregaAreaReceitas(List<ReceitaUsuarioPeriodo> receitas) {
+		StringBuilder s = new StringBuilder();
+		for(ReceitaUsuarioPeriodo r: receitas){
+			s.append(r.getChaveComposta().getReceita_id().getNomeReceita() + "\t " +  r.getValor());
+		}
+		
+		String st = s.toString();
+		areaReceitas.append(st);
+		
+	}
 	
 	public void modofechado(){
 		this.setVisible(false);
+	}
+	
+	private Periodo formataComboPeriodo(String periodo){
+		
+		String periodoAnoAjustado [] = periodo.split(" - ");
+		
+		String mes = periodoAnoAjustado[0];
+		String ano = periodoAnoAjustado[1];
+		//Busca no banco de dados
+		Periodo p = PeriodoDao.getInstance().buscarPeriodoMesAno(Integer.valueOf(mes), Integer.valueOf(ano));
+		return p;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

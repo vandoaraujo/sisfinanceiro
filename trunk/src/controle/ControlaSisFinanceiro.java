@@ -101,7 +101,9 @@ public class ControlaSisFinanceiro implements ActionListener {
 		else if(comando.equals("estatisticas")){
 			
 			RelatorioSimplesMensalDespesaReceitaTela rel = new RelatorioSimplesMensalDespesaReceitaTela();
+			List<Periodo> p =PeriodoDao.getInstance().listar();
 			RelatorioFinanceiroControle.getInstance().configuraTela(rel);
+			RelatorioFinanceiroControle.getInstance().populaComboPeriodo(p);
 			RelatorioFinanceiroControle.getInstance().habilita();
 			
 		}

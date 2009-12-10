@@ -2,7 +2,10 @@ package dao;
 
 import java.util.Iterator;
 import java.util.List;
+
+import modelo.DespesaUsuarioPeriodo;
 import modelo.Periodo;
+import modelo.ReceitaUsuarioPeriodo;
 import modelo.Usuario;
 
 import org.apache.log4j.Logger;
@@ -93,6 +96,24 @@ public class PeriodoDao {
 	    	return maxObject;
 
 	    }
+
+		public List<DespesaUsuarioPeriodo> buscaDespesasPeriodo(Periodo p,Usuario usu) {
+
+	    	List<DespesaUsuarioPeriodo> des = session
+    		.createQuery(
+    			"from modelo.DespesaUsuarioPeriodo d where d.chaveComposta.periodo_id=:idPeriodo and d.chaveComposta.usuario_id=:idUsuario")
+    			.setInteger("idPeriodo", p.getId()).setInteger("idUsuario", usu.getId()).list();
+    		return des;
+		}
+		
+		public List<ReceitaUsuarioPeriodo> buscaReceitasPeriodo(Periodo p,Usuario usu) {
+
+	    	List<ReceitaUsuarioPeriodo> rec = session
+    		.createQuery(
+    			"from modelo.ReceitaUsuarioPeriodo d where d.chaveComposta.periodo_id=:idPeriodo and d.chaveComposta.usuario_id=:idUsuario")
+    			.setInteger("idPeriodo", p.getId()).setInteger("idUsuario", usu.getId()).list();
+    		return rec;
+		}
 	    
 	/*	Iterator proxIdAtendimento = AtendimentoDao.getInstance()
 		.listaUltimoId();

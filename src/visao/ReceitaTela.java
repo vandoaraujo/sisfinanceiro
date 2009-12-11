@@ -8,12 +8,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
+
+import modelo.Despesa;
+import modelo.Receita;
+
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class ReceitaTela extends JFrame {
 
@@ -29,7 +35,10 @@ public class ReceitaTela extends JFrame {
 	private JLabel novaReceitaLabel = null;
 	private JButton cadastrarReceita = null;
 	private JButton alterarReceita = null;
+	private JButton excluirReceita = null;
 	private Font f2;
+	
+	
 	/**
 	 * This is the default constructor
 	 */
@@ -78,26 +87,31 @@ public class ReceitaTela extends JFrame {
 			idJLabel.setText("codigo:");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
-			jContentPane.add(getJTextAreaDespesa(), null);
-			jContentPane.add(getJTextFieldNovaDespesa(), null);
+			jContentPane.add(getJTextAreaReceita(), null);
+			jContentPane.add(getJTextFieldNovaReceita(), null);
 			jContentPane.add(idJLabel, null);
 			jContentPane.add(nomeJLabel, null);
 			jContentPane.add(fixaJLabel, null);
 			jContentPane.add(getFixaJCheckBox(), null);
 			jContentPane.add(fixaLabelNovaReceita, null);
 			jContentPane.add(novaReceitaLabel, null);
-			jContentPane.add(getCadastrarDespesa(), null);
-			jContentPane.add(getCadastrarDespesa1(), null);
+			jContentPane.add(getCadastrarReceita(), null);
+			jContentPane.add(getCadastrarReceita1(), null);
+			jContentPane.add(getExcluirReceita(), null);
 		}
 		return jContentPane;
 	}
+	
+	private void desabilitaBotao() {
+		excluirReceita.setEnabled(false);
+	}
 
 	/**
-	 * This method initializes jTextAreaDespesa	
+	 * This method initializes jTextAreaReceita	
 	 * 	
 	 * @return javax.swing.JTextArea	
 	 */
-	private JTextArea getJTextAreaDespesa() {
+	private JTextArea getJTextAreaReceita() {
 		if (jTextAreaReceita == null) {
 			jTextAreaReceita = new JTextArea();
 			jTextAreaReceita.setBounds(new Rectangle(10, 103, 356, 151));
@@ -105,7 +119,7 @@ public class ReceitaTela extends JFrame {
 			jTextAreaReceita.setAlignmentY(50);
 			jTextAreaReceita.setAlignmentX(50);
 			jTextAreaReceita.setFont(f2);
-			jTextAreaReceita.setBackground(Color.WHITE);
+			jTextAreaReceita.setBackground(Color.YELLOW);
 			JScrollPane jscroll=new JScrollPane(jTextAreaReceita);
 		    jscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 			jscroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -120,7 +134,7 @@ public class ReceitaTela extends JFrame {
 	 * 	
 	 * @return javax.swing.JTextField	
 	 */
-	private JTextField getJTextFieldNovaDespesa() {
+	private JTextField getJTextFieldNovaReceita() {
 		if (jTextFieldNovaReceita == null) {
 			jTextFieldNovaReceita = new JTextField();
 			jTextFieldNovaReceita.setBounds(new Rectangle(10, 45, 289, 27));
@@ -146,11 +160,11 @@ public class ReceitaTela extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getCadastrarDespesa() {
+	private JButton getCadastrarReceita() {
 		if (cadastrarReceita == null) {
 			cadastrarReceita = new JButton();
 			cadastrarReceita.setBounds(new Rectangle(373, 42, 135, 35));
-			cadastrarReceita.setText("nova Receita");
+			cadastrarReceita.setText("confirmar");
 		}
 		return cadastrarReceita;
 	}
@@ -160,27 +174,127 @@ public class ReceitaTela extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getCadastrarDespesa1() {
+	private JButton getCadastrarReceita1() {
 		if (alterarReceita == null) {
 			alterarReceita = new JButton();
 			alterarReceita.setBounds(new Rectangle(374, 87, 135, 36));
-			alterarReceita.setText("alterar receita");
+			alterarReceita.setText("edicao");
 		}
 		return alterarReceita;
 	}
 	
-	public void veiculosEstacionados(String palavra){
+	/**
+	 * This method initializes excluirJButton	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getExcluirReceita() {
+		if (excluirReceita == null) {
+			excluirReceita = new JButton();
+			excluirReceita.setText("excluir");
+			excluirReceita.setBounds(new Rectangle(374, 136, 133, 37));
+		}
+		return excluirReceita;
+	}
+	
+	public void limpaReceitasArea(){
 		   jTextAreaReceita.setText("");
-		   jTextAreaReceita.append(palavra);
 	}
 
 	public void configuraOuvinte(ActionListener controle){
 			
-			alterarReceita.addActionListener(controle);
-			alterarReceita.setActionCommand("alterarReceita");
 			cadastrarReceita.addActionListener(controle);
-			cadastrarReceita.setActionCommand("cadastrarReceita");
+			cadastrarReceita.setActionCommand("confirmar");
+			alterarReceita.addActionListener(controle);
+			alterarReceita.setActionCommand("edição");
+			excluirReceita.addActionListener(controle);
+			alterarReceita.setActionCommand("excluir");
 		
+	}
+	
+	public void carregaAreaReceitas(List<Receita> receitas) {
+		StringBuilder s = new StringBuilder();
+		for(Receita r: receitas){
+			s.append(r.getId() + "\t\t     " + r.getNomeReceita() + "\n ");
+		}
+		
+		String st = s.toString();
+		jTextAreaReceita.append(st);
+		
+	}
+	
+	private boolean dadosObrigatorios() {
+		String nomeDespesa = jTextFieldNovaReceita.getText();
+		if(nomeDespesa.equals("")){
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public void populaCamposObjetoBanco(Receita r) {
+		
+		jTextFieldNovaReceita.setText(r.getNomeReceita());
+		
+		
+	}
+	
+	public Receita leDadosTelaCadastro() {
+		String fixaOuVariavel = "";
+		
+		//Antes de ler os dados, analisa se estao preenchidos o nome
+		if(dadosObrigatorios()){
+			
+			String nomeReceita = jTextFieldNovaReceita.getText();
+			boolean fixa = false;
+			fixaOuVariavel = fixaJCheckBox.getText();
+			System.out.println("TESTA CHECK " + fixaOuVariavel);
+			
+			if(!fixaOuVariavel.equals("")){
+			
+				fixa = true;
+			}
+			
+			Receita rec = new Receita(nomeReceita);
+			return rec;
+		
+		
+		}else{
+				JOptionPane.showMessageDialog(null, "Dados obrigatorios nao preenchidos!");
+		}
+			return null;
+			
+	}
+	
+	public void leDadosTelaCadastro(Receita r){
+		
+		String fixaOuVariavel = "";
+		
+		//Antes de ler os dados, analisa se estao preenchidos o nome
+		if(dadosObrigatorios()){
+			
+			String nomeReceita = jTextFieldNovaReceita.getText();
+			
+			r.setNomeReceita(nomeReceita);
+			
+		
+		}else{
+				JOptionPane.showMessageDialog(null, "Dados obrigatorios nao preenchidos!");
+		}
+	}
+	
+	/**
+	 * This method initializes excluirJButton	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getExcluirButton() {
+		if (excluirReceita == null) {
+			excluirReceita = new JButton();
+			excluirReceita.setBounds(new Rectangle(375, 148, 133, 37));
+			excluirReceita.setText("excluir");
+		}
+		return excluirReceita;
 	}
 
 

@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import modelo.DespesaUsuarioPeriodo;
 import modelo.Periodo;
 import modelo.ReceitaUsuarioPeriodo;
@@ -73,16 +75,31 @@ public class RelatorioFinanceiroControle implements ActionListener {
 		
 		List<ReceitaUsuarioPeriodo> receitasUsuarioPeriodo = PeriodoDao.getInstance().buscaReceitasPeriodo(p,usuarioInstance);
 		
+		avaliaPeriodo(despesasUsuarioPeriodo, receitasUsuarioPeriodo);
+
 		
-		double totalR = totalizaReceitas(receitasUsuarioPeriodo);
-		double totalD = totalizaDespesas(despesasUsuarioPeriodo);
-		double valorFinal = calculaDiferenca(totalR,totalD);
+	}
+
+	private void avaliaPeriodo(
+			List<DespesaUsuarioPeriodo> despesasUsuarioPeriodo,
+			List<ReceitaUsuarioPeriodo> receitasUsuarioPeriodo) {
 		
-		vc.carregaAreaDespesas(despesasUsuarioPeriodo);
-		vc.carregaAreaReceitas(receitasUsuarioPeriodo);
-		vc.populaResultados(totalR, totalD, valorFinal);
+		if(despesasUsuarioPeriodo.size() != 0 || receitasUsuarioPeriodo.size() != 0){
+			
+			vc.limpaTela();
+			double totalR = totalizaReceitas(receitasUsuarioPeriodo);
+			double totalD = totalizaDespesas(despesasUsuarioPeriodo);
+			double valorFinal = calculaDiferenca(totalR,totalD);
+			
+			vc.carregaAreaDespesas(despesasUsuarioPeriodo);
+			vc.carregaAreaReceitas(receitasUsuarioPeriodo);
+			vc.populaResultados(totalR, totalD, valorFinal);
+		}
+		else{
+			vc.limpaTela();
+			JOptionPane.showMessageDialog(null,"Não há registros no período informado!" );
+		}
 		
-		System.out.println("VALOR FINAL " + NumberUtil.truncate(2, valorFinal));
 		
 	}
 

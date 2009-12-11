@@ -1,7 +1,9 @@
 package dao;
 
 import java.util.List;
+
 import modelo.Usuario;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

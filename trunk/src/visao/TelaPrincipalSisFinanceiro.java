@@ -48,6 +48,8 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 	
 	private JMenuItem sobre = null;
 
+	private JLabel labelImagem = null;
+
 	/**
 	 * This is the default constructor
 	 */
@@ -78,15 +80,22 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			ImageIcon im=new ImageIcon("images//financas.jpg");
+			labelImagem = new JLabel();
+			labelImagem.setBounds(new Rectangle(111, 92, 482, 219));
+			labelImagem.setText("");
+			ImageIcon im=new ImageIcon("images\\financasImagem.jpg");
 			LabelImage = new JLabel();
 			LabelImage.setIcon(im);
 			LabelImage.setBounds(new Rectangle(8, 4, 759, 338));
-			LabelImage.setText(" ");
+			LabelImage.setText("");
+			//LabelImage.set
 			jContentPane = new JPanel();
-			jContentPane.setBackground(new Color(0, 156, 218));
+			jContentPane.setBackground(new Color(0, 200, 125));
 			jContentPane.setLayout(null);
 			jContentPane.add(LabelImage, null);
+			//jContentPane.add(labelImagem, null);
+			
+
 		}
 		return jContentPane;
 	}

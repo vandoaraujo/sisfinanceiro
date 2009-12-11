@@ -13,6 +13,11 @@ public class Receita {
 	private int idReceita;
 	
 	private String nomeReceita;
+	
+	public Receita(String nomeDespesa){
+		
+		this.nomeReceita = nomeReceita;
+	}
 
 	public int getId() {
 		return idReceita;

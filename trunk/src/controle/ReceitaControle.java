@@ -2,14 +2,23 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import dao.DespesaDao;
+import dao.ReceitaDao;
+
+import modelo.Despesa;
+import modelo.Receita;
 
 import visao.ReceitaTela;
 
 public class ReceitaControle implements ActionListener{
 	
 	ReceitaTela vc;
+	Receita receitaCorrente = null;
 	
 	private static ReceitaControle singleton=null;
 	
@@ -35,7 +44,6 @@ public class ReceitaControle implements ActionListener{
 	public void habilita(){
 		vc.setVisible(true);
 	}
-			
 
 
 	public void actionPerformed(ActionEvent eve) {
@@ -43,13 +51,79 @@ public class ReceitaControle implements ActionListener{
 
 		String comando = eve.getActionCommand();
 		
-		if(comando.equals(("alterarReceita")))
+		if(comando.equals(("edicao")))
 		{
+			receitaCorrente = alteraReceita();
 			
 		}
-		else if(comando.equals("cadastrarReceita"))
+		else if(comando.equals("confirmar"))
 		{
+			//Para o caso de salvar
+			if(receitaCorrente == null){
+				
+				Receita r = vc.leDadosTelaCadastro();
+				ReceitaDao.getInstance().salvar(r);
+				vc.limpaReceitasArea();
+				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
+				vc.carregaAreaReceitas(novasReceitas);
+			}
+			//Para o caso de atualizar
+			else{
+				
+				vc.leDadosTelaCadastro();
+				ReceitaDao.getInstance().atualizar(receitaCorrente);
+				vc.limpaReceitasArea();
+				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
+				vc.carregaAreaReceitas(novasReceitas);
+				receitaCorrente = null;
+			}
 			
 		}
+		
+		else if(comando.equals("excluir")){
+			
+			if(receitaCorrente != null){
+				ReceitaDao.getInstance().deletar(receitaCorrente);
+				vc.limpaReceitasArea();
+				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
+				vc.carregaAreaReceitas(novasReceitas);
+				JOptionPane.showMessageDialog(null,"Deletado com sucesso");
+				
+			}
+				receitaCorrente = null;
+		}
+	}
+	
+	private void analisaMudancaObjetoReceita(Receita r) {
+		
+		Receita receitaTela = vc.leDadosTelaCadastro();
+		
+			
+		
+		
+	}
+	
+	private Receita alteraReceita() {
+		
+		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o codigo da Receita"));
+		Receita r = null;
+		try {
+			r = ReceitaDao.getInstance().BuscaReceitaId(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		vc.populaCamposObjetoBanco(r);
+		
+		return r;
+		
+	}
+	
+	public Receita getReceitaCorrente() {
+		return receitaCorrente;
+	}
+
+	public void setReceitaCorrente(Receita receitaCorrente) {
+		this.receitaCorrente = receitaCorrente;
 	}
 }

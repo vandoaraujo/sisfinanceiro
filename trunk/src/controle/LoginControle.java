@@ -45,7 +45,7 @@ public class LoginControle implements ActionListener {
 	private void configuraTela(UsuarioCadastroTela usuTela) {
 
 		this.telaUsuario = usuTela;
-		telaUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		telaUsuario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		telaUsuario.configuraOuvinte(this);
 		// Proíbe Redimensionamento
 		telaUsuario.setResizable(false);
@@ -53,6 +53,7 @@ public class LoginControle implements ActionListener {
 	}
 
 	public void habilitaTelaLogin() {
+		telaL.setModal(true);
 		telaL.setVisible(true);
 		telaL.limpaCredenciais();
 
@@ -136,7 +137,13 @@ public class LoginControle implements ActionListener {
 	}
 
 	private void retornaTelaLogin() {
-		System.out.println("IMPLEMENTAR!!!");
+
+		telaUsuario.setVisible(false);
+		telaUsuario.dispose();
+		UsuarioCadastroTela usuTela = new UsuarioCadastroTela();
+		LoginControle.getInstance().configuraTela(usuTela);
+		LoginControle.getInstance().habilitaTelaCadastroUsuario();
+
 	}
 
 	private void logicaBotaoLogin() {

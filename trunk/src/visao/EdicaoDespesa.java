@@ -1,10 +1,11 @@
 package visao;
 
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
 
-public class EdicaoDespesa extends JFrame {
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+
+public class EdicaoDespesa extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;

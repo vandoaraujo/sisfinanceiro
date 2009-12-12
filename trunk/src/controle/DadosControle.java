@@ -33,6 +33,7 @@ public class DadosControle implements ActionListener{
 	}
 		
 	public void habilita(){
+		vc.setModal(true);
 		vc.setVisible(true);
 	}
 			
@@ -49,7 +50,8 @@ public class DadosControle implements ActionListener{
 		}
 		else if(comando.equals("retornar"))
 		{
-			
+			vc.setVisible(false);
+			vc.dispose();
 		}
 	}
 	

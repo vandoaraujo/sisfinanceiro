@@ -1,24 +1,27 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import modelo.Despesa;
 import modelo.Periodo;
-import modelo.Receita;
 import util.UsuarioPeriodoDespesaTO;
 
-public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
+public class CadastroDespesaUsuarioPeriodoTela extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -32,7 +35,7 @@ public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
 	private JComboBox periodoCombo = null;
 	private JLabel periodoLabel = null;
 	private JButton voltarBotao = null;
-
+	private JLabel jLabelFormato = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -59,6 +62,9 @@ public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabelFormato = new JLabel();
+			jLabelFormato.setBounds(new Rectangle(366, 73, 68, 26));
+			jLabelFormato.setText("Ex:  50.56");
 			periodoLabel = new JLabel();
 			periodoLabel.setBounds(new Rectangle(17, 226, 124, 29));
 			periodoLabel.setText("Período:");
@@ -83,6 +89,8 @@ public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
 			jContentPane.add(getPeriodoCombo(), null);
 			jContentPane.add(periodoLabel, null);
 			jContentPane.add(getVoltarBotao(), null);
+			jContentPane.add(jLabelFormato, null);
+			jContentPane.setBackground(new Color(0, 156, 218));
 		}
 		return jContentPane;
 	}
@@ -95,7 +103,11 @@ public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
 	private JTextArea getAreaTex() {
 		if (areaTex == null) {
 			areaTex = new JTextArea();
+			areaTex.setBackground(Color.YELLOW);
 			areaTex.setBounds(new Rectangle(155, 118, 265, 98));
+			JScrollPane jscroll=new JScrollPane(areaTex);
+		    jscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			jscroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		}
 		return areaTex;
 	}
@@ -108,7 +120,7 @@ public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
 	private JTextField getValorText() {
 		if (valorText == null) {
 			valorText = new JTextField();
-			valorText.setBounds(new Rectangle(153, 72, 145, 27));
+			valorText.setBounds(new Rectangle(153, 72, 206, 27));
 		}
 		return valorText;
 	}
@@ -133,8 +145,10 @@ public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
 	 */
 	private JButton getOkCadastro() {
 		if (okCadastro == null) {
+			//ImageIcon imageBotao = new ImageIcon("..\\sisfinanceiro\\src\\images\\cadastrar.jpg");
 			okCadastro = new JButton();
-			okCadastro.setBounds(new Rectangle(460, 15, 112, 34));
+			okCadastro.setBackground(Color.GREEN);
+			okCadastro.setBounds(new Rectangle(460, 15, 115, 34));
 			okCadastro.setText("Cadastro");
 		}
 		return okCadastro;
@@ -161,8 +175,11 @@ public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
 	private JButton getVoltarBotao() {
 		if (voltarBotao == null) {
 			voltarBotao = new JButton();
+			voltarBotao.setBackground(Color.LIGHT_GRAY);
 			voltarBotao.setBounds(new Rectangle(459, 68, 113, 34));
 			voltarBotao.setText("Voltar");
+			voltarBotao.setBackground(Color.GRAY);
+
 		}
 		return voltarBotao;
 	}

@@ -46,17 +46,16 @@ public class ControlaSisFinanceiro implements ActionListener {
 	public void configuraTela(TelaPrincipalSisFinanceiro vc){
 		//logger.isDebugEnabled();
 		this.vc=vc;
-		vc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//vc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		vc.configuraOuvinte(this);	
 		vc.setResizable(false);
 		vc.setLocationRelativeTo(null);
 	}
-		
+	
 	public void habilita(){
+		vc.setModal(true);
 		vc.setVisible(true);
 	}
-			
-
 
 	public void actionPerformed(ActionEvent eve) {
 		// TODO Auto-generated method stub

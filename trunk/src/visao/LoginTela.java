@@ -1,24 +1,23 @@
 package visao;
 
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import dao.UsuarioDao;
-
 import modelo.Usuario;
 
 
-public class LoginTela extends JFrame {
+public class LoginTela extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,6 +36,8 @@ public class LoginTela extends JFrame {
 	private JLabel info = null;
 
 	private JButton semLogin = null;
+
+	private JLabel jLabelCadeado = null;
 
 	/**
 	 * This is the default constructor
@@ -65,11 +66,12 @@ public class LoginTela extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabelCadeado = new JLabel();
+			jLabelCadeado.setBounds(new Rectangle(348, 72, 102, 66));
+			jLabelCadeado.setText("");
 			info = new JLabel();
-			ImageIcon ima=new ImageIcon("images//cadeado.jpg");
 			info.setBounds(new Rectangle(89, 11, 278, 24));
 			info.setText("SisFinanceiro - Controle Financeiro Pessoal:");
-			info.setIcon(ima);
 			senha = new JLabel();
 			senha.setBounds(new Rectangle(13, 115, 57, 26));
 			senha.setText("Senha:");
@@ -77,6 +79,7 @@ public class LoginTela extends JFrame {
 			usuario.setBounds(new Rectangle(16, 72, 55, 27));
 			usuario.setText("Usuário:");
 			jContentPane = new JPanel();
+			jContentPane.setBackground(new Color(0, 156, 218));
 			jContentPane.setLayout(null);
 			jContentPane.add(usuario, null);
 			jContentPane.add(senha, null);
@@ -85,6 +88,8 @@ public class LoginTela extends JFrame {
 			jContentPane.add(getLogIn(), null);
 			jContentPane.add(info, null);
 			jContentPane.add(getSemLogin(), null);
+			jContentPane.add(jLabelCadeado, null);
+			jLabelCadeado.setIcon(new ImageIcon("..\\sisfinanceiro\\src\\images\\cadeado.jpg"));
 		}
 		return jContentPane;
 	}
@@ -97,7 +102,7 @@ public class LoginTela extends JFrame {
 	private JTextField getCampoUsuario() {
 		if (campoUsuario == null) {
 			campoUsuario = new JTextField();
-			campoUsuario.setBounds(new Rectangle(95, 73, 209, 25));
+			campoUsuario.setBounds(new Rectangle(95, 73, 230, 25));
 		}
 		return campoUsuario;
 	}
@@ -110,7 +115,7 @@ public class LoginTela extends JFrame {
 	private JPasswordField getCampoSenha() {
 		if (campoSenha == null) {
 			campoSenha = new JPasswordField();
-			campoSenha.setBounds(new Rectangle(97, 115, 205, 22));
+			campoSenha.setBounds(new Rectangle(97, 115, 227, 22));
 		}
 		return campoSenha;
 	}
@@ -123,7 +128,8 @@ public class LoginTela extends JFrame {
 	private JButton getLogIn() {
 		if (logIn == null) {
 			logIn = new JButton();
-			logIn.setBounds(new Rectangle(42, 180, 148, 28));
+			logIn.setBackground(Color.GREEN);
+			logIn.setBounds(new Rectangle(53, 175, 148, 34));
 			logIn.setText("Entrar");
 		}
 		return logIn;
@@ -168,8 +174,9 @@ public class LoginTela extends JFrame {
 	private JButton getSemLogin() {
 		if (semLogin == null) {
 			semLogin = new JButton();
-			semLogin.setBounds(new Rectangle(224, 180, 175, 28));
-			semLogin.setText("Nao tenho Login");
+			semLogin.setBackground(Color.LIGHT_GRAY);
+			semLogin.setBounds(new Rectangle(264, 176, 175, 33));
+			semLogin.setText("Nao tenho Login!");
 		}
 		return semLogin;
 	}

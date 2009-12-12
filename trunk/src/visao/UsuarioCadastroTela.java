@@ -1,20 +1,20 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import modelo.Usuario;
 
-public class UsuarioCadastroTela extends JFrame {
+public class UsuarioCadastroTela extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +39,8 @@ public class UsuarioCadastroTela extends JFrame {
 	private JButton cadastrar = null;
 
 	private JButton retornar = null;
+
+	private JLabel jLabelDados = null;
 
 	/**
 	 * This is the default constructor public Dvd(int codigo,String titulo,
@@ -68,20 +70,25 @@ public class UsuarioCadastroTela extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabelDados = new JLabel();
+			jLabelDados.setBounds(new Rectangle(107, 6, 265, 21));
+			jLabelDados.setText("Favor informar ou alterar seus dados abaixo:");
 			jLabelDuracao = new JLabel();
-			jLabelDuracao.setBounds(new Rectangle(10, 137, 107, 23));
+			jLabelDuracao.setBounds(new Rectangle(4, 160, 107, 23));
 			jLabelDuracao.setText("confirme a senha:");
 			jLabelgenero = new JLabel();
-			jLabelgenero.setBounds(new Rectangle(11, 108, 94, 19));
+			jLabelgenero.setBounds(new Rectangle(7, 120, 94, 19));
 			jLabelgenero.setText("senha:");
 			jLabelTittulo = new JLabel();
-			jLabelTittulo.setBounds(new Rectangle(9, 76, 97, 23));
+			jLabelTittulo.setBounds(new Rectangle(9, 83, 97, 23));
 			jLabelTittulo.setText("login:");
 			jLabelCodigo = new JLabel();
 			jLabelCodigo.setBounds(new Rectangle(9, 42, 95, 23));
 			jLabelCodigo.setText("Nome:");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
+			jContentPane.setBackground(new Color(35, 160, 218));
+			jContentPane.setOpaque(true);
 			jContentPane.add(getCodigo(), null);
 			jContentPane.add(getNome(), null);
 			jContentPane.add(getGenero(), null);
@@ -92,6 +99,7 @@ public class UsuarioCadastroTela extends JFrame {
 			jContentPane.add(jLabelDuracao, null);
 			jContentPane.add(getCadastrar(), null);
 			jContentPane.add(getRetornar(), null);
+			jContentPane.add(jLabelDados, null);
 		}
 		return jContentPane;
 	}
@@ -117,7 +125,7 @@ public class UsuarioCadastroTela extends JFrame {
 	private JTextField getNome() {
 		if (login == null) {
 			login = new JTextField();
-			login.setBounds(new Rectangle(119, 77, 175, 21));
+			login.setBounds(new Rectangle(118, 85, 175, 21));
 		}
 		return login;
 	}
@@ -130,7 +138,7 @@ public class UsuarioCadastroTela extends JFrame {
 	private JPasswordField getGenero() {
 		if (senha == null) {
 			senha = new JPasswordField();
-			senha.setBounds(new Rectangle(119, 106, 173, 22));
+			senha.setBounds(new Rectangle(119, 121, 173, 22));
 		}
 		return senha;
 	}
@@ -143,7 +151,7 @@ public class UsuarioCadastroTela extends JFrame {
 	private JPasswordField getDuracao() {
 		if (senhaNovamente == null) {
 			senhaNovamente = new JPasswordField();
-			senhaNovamente.setBounds(new Rectangle(119, 136, 172, 23));
+			senhaNovamente.setBounds(new Rectangle(119, 160, 172, 23));
 		}
 		return senhaNovamente;
 	}
@@ -156,8 +164,10 @@ public class UsuarioCadastroTela extends JFrame {
 	private JButton getCadastrar() {
 		if (cadastrar == null) {
 			cadastrar = new JButton();
-			cadastrar.setBounds(new Rectangle(389, 121, 109, 35));
+			cadastrar.setBounds(new Rectangle(362, 91, 135, 65));
 			cadastrar.setText("Cadastrar");
+			cadastrar.setBackground(Color.GREEN);
+
 		}
 		return cadastrar;
 	}
@@ -170,8 +180,10 @@ public class UsuarioCadastroTela extends JFrame {
 	private JButton getRetornar() {
 		if (retornar == null) {
 			retornar = new JButton();
-			retornar.setBounds(new Rectangle(388, 174, 113, 31));
+			retornar.setBounds(new Rectangle(364, 174, 134, 31));
 			retornar.setText("Retornar");
+			retornar.setBackground(Color.GRAY);
+
 		}
 		return retornar;
 	}

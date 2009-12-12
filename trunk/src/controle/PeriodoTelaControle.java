@@ -55,6 +55,7 @@ public class PeriodoTelaControle implements ActionListener {
 	}
 		
 	public void habilita(){
+		vc.setModal(true);
 		vc.setVisible(true);
 	}
 	

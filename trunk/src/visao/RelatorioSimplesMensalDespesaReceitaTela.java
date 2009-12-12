@@ -1,16 +1,16 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,7 +24,7 @@ import modelo.Periodo;
 import modelo.ReceitaUsuarioPeriodo;
 import dao.PeriodoDao;
 
-public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
+public class RelatorioSimplesMensalDespesaReceitaTela extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -41,6 +41,7 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 	private JScrollPane jScrollPane1 = null;  //  @jve:decl-index=0:visual-constraint="45,155"
 	private JTable jTableReceita = null;
 	Vector column;
+	private JLabel jLabelInfo = null;
 
 	/**
 	 * This is the default constructor
@@ -73,6 +74,9 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabelInfo = new JLabel();
+			jLabelInfo.setBounds(new Rectangle(36, 3, 443, 34));
+			jLabelInfo.setText("Escolha um período e clique em processar: ");
 			saldojLabel = new JLabel();
 			saldojLabel.setBounds(new Rectangle(553, 151, 131, 23));
 			saldojLabel.setText("saldo Final no Mês:");
@@ -94,6 +98,8 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 			jContentPane.add(saldojLabel, null);
 			jContentPane.add(getJScrollPane(), null);
 			jContentPane.add(getJScrollPane1(), null);
+			jContentPane.setBackground(new Color(35, 160, 218));
+			jContentPane.add(jLabelInfo, null);
 			saldoCampo.setEditable(false);
 			totalDespesas.setEditable(false);
 			totalReceitas.setEditable(false);
@@ -109,7 +115,9 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 	private JComboBox getPeriodoCombo() {
 		if (periodoCombo == null) {
 			periodoCombo = new JComboBox();
-			periodoCombo.setBounds(new Rectangle(125, 23, 318, 27));
+			periodoCombo.setBounds(new Rectangle(38, 46, 318, 27));
+			periodoCombo.setBackground(Color.YELLOW);
+
 		}
 		return periodoCombo;
 	}
@@ -122,8 +130,10 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 	private JButton getAcaoBotaoCarregaRelatorio() {
 		if (acaoBotaoCarregaRelatorio == null) {
 			acaoBotaoCarregaRelatorio = new JButton();
-			acaoBotaoCarregaRelatorio.setBounds(new Rectangle(474, 21, 119, 30));
+			acaoBotaoCarregaRelatorio.setBounds(new Rectangle(543, 48, 147, 50));
 			acaoBotaoCarregaRelatorio.setText("Processar!");
+			acaoBotaoCarregaRelatorio.setBackground(Color.GREEN);
+
 		}
 		return acaoBotaoCarregaRelatorio;
 	}
@@ -138,6 +148,7 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 			totalReceitas = new JTextField();
 			totalReceitas.setEditable(false);
 			totalReceitas.setBounds(new Rectangle(37, 405, 207, 26));
+			totalReceitas.setBackground(Color.GREEN);
 		}
 		return totalReceitas;
 	}
@@ -152,6 +163,8 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 			totalDespesas = new JTextField();
 			totalDespesas.setEditable(false);
 			totalDespesas.setBounds(new Rectangle(294, 405, 218, 26));
+			totalDespesas.setBackground(Color.RED);
+
 		}
 		return totalDespesas;
 	}
@@ -166,7 +179,12 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 			saldoCampo = new JTextField();
 			saldoCampo.setEditable(false);
 			saldoCampo.setBounds(new Rectangle(552, 202, 135, 23));
+			saldoCampo.setBackground(Color.YELLOW);
 		}
+		return saldoCampo;
+	}
+	
+	public JTextField trocaCorSaldo(){
 		return saldoCampo;
 	}
 	

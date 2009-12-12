@@ -25,19 +25,23 @@ public class SisFinanceiroMain {
 
 		//Inicializa objetos de vista e controle
 		LoginTela lt = new LoginTela();
-		lt.setVisible(true);
+
 		TelaPrincipalSisFinanceiro visao =new TelaPrincipalSisFinanceiro();
 		ControlaSisFinanceiro.getInstance().configuraTela(visao); 
         LoginControle.getInstance().configuraTela(lt);
+
 
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			logger.error("Ocorreu um erro no processo da thread");
 		}
-		
+		lt.setVisible(true);
+		lt.setModal(true);
 		sp.setDisplayString(100, "Instanciando objetos de interface e controle...");
 		sp.hideSplash();
+
+
 	}
 
 	public static void main(String[] args) {

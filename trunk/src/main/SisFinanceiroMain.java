@@ -37,7 +37,7 @@ public class SisFinanceiroMain {
 			logger.error("Ocorreu um erro no processo da thread");
 		}
 		lt.setVisible(true);
-		lt.setModal(true);
+		//lt.setModal(true);
 		sp.setDisplayString(100, "Instanciando objetos de interface e controle...");
 		sp.hideSplash();
 

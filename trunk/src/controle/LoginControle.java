@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import modelo.Usuario;
 import visao.LoginTela;
+import visao.TelaPrincipalSisFinanceiro;
 import visao.UsuarioCadastroTela;
 import dao.UsuarioDao;
 import exceptions.LoginRepetidoException;
@@ -140,9 +141,11 @@ public class LoginControle implements ActionListener {
 
 		telaUsuario.setVisible(false);
 		telaUsuario.dispose();
-		UsuarioCadastroTela usuTela = new UsuarioCadastroTela();
-		LoginControle.getInstance().configuraTela(usuTela);
-		LoginControle.getInstance().habilitaTelaCadastroUsuario();
+		telaL.setVisible(true);
+		//TelaPrincipalSisFinanceiro visao =new TelaPrincipalSisFinanceiro();
+		//ControlaSisFinanceiro.getInstance().configuraTela(visao); 
+        //LoginControle.getInstance().configuraTela(lt);
+
 
 	}
 

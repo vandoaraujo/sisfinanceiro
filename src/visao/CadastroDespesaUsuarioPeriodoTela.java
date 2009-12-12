@@ -49,7 +49,7 @@ public class CadastroDespesaUsuarioPeriodoTela extends JFrame {
 	private void initialize() {
 		this.setSize(596, 306);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Cadastro de Despesas em um Período Corrente");
 	}
 
 	/**

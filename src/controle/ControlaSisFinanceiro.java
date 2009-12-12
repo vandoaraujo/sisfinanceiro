@@ -75,7 +75,9 @@ public class ControlaSisFinanceiro implements ActionListener {
 		else if(comando.equals("tabelaReceitas"))
 		{
 			ReceitaTela visao =new ReceitaTela();
-			ReceitaControle.getInstance().configuraTela(visao); 
+			ReceitaControle.getInstance().configuraTela(visao);
+			List<Receita> receita =  ReceitaDao.getInstance().listar();
+			visao.carregaAreaReceitas(receita);
 			ReceitaControle.getInstance().habilita();
 			
 		}

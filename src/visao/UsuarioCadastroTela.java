@@ -57,7 +57,7 @@ public class UsuarioCadastroTela extends JFrame {
 	private void initialize() {
 		this.setSize(527, 263);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Cadastro de Usuários");
 		this.setLocation(400, 350);
 	}
 
@@ -104,7 +104,7 @@ public class UsuarioCadastroTela extends JFrame {
 	private JTextField getCodigo() {
 		if (nome == null) {
 			nome = new JTextField();
-			nome.setBounds(new Rectangle(117, 45, 302, 20));
+			nome.setBounds(new Rectangle(119, 45, 302, 20));
 		}
 		return nome;
 	}
@@ -117,7 +117,7 @@ public class UsuarioCadastroTela extends JFrame {
 	private JTextField getNome() {
 		if (login == null) {
 			login = new JTextField();
-			login.setBounds(new Rectangle(118, 77, 175, 21));
+			login.setBounds(new Rectangle(119, 77, 175, 21));
 		}
 		return login;
 	}
@@ -143,7 +143,7 @@ public class UsuarioCadastroTela extends JFrame {
 	private JPasswordField getDuracao() {
 		if (senhaNovamente == null) {
 			senhaNovamente = new JPasswordField();
-			senhaNovamente.setBounds(new Rectangle(124, 137, 167, 23));
+			senhaNovamente.setBounds(new Rectangle(119, 136, 172, 23));
 		}
 		return senhaNovamente;
 	}

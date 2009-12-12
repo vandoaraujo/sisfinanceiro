@@ -31,7 +31,7 @@ public class SobreTela extends JFrame {
 	private void initialize() {
 		this.setSize(470, 200);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Sobre o sistema");
 	}
 
 	/**

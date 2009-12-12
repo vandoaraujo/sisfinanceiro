@@ -35,7 +35,7 @@ public class TrocarPeriodoTela extends JFrame {
 	private void initialize() {
 		this.setSize(570, 253);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Troca de Período Corrente");
 	}
 
 	/**

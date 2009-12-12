@@ -33,7 +33,7 @@ public class UsuarioDao{
     public void atualizar(Usuario usuario) {
 
 		Transaction t = session.beginTransaction();
-		session.update(usuario);
+		session.merge(usuario);
 		t.commit();
 		session.flush();
 		session.close();

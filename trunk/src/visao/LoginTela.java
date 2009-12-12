@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,7 +18,7 @@ import javax.swing.JTextField;
 import modelo.Usuario;
 
 
-public class LoginTela extends JDialog {
+public class LoginTela extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 

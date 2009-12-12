@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import modelo.Periodo;
 import modelo.Receita;
 import modelo.ReceitaUsuarioPeriodo;
@@ -76,12 +78,13 @@ public class ReceitaUsuarioPeriodoControle implements ActionListener {
 			
 			ReceitaPertenceUsuarioEmPeriodoDao.getInstance().salvar(rUP);
 			
-			
+			JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+
 			
 		}
 		else if(comando.equals("retornar"))
 		{
-			
+			vc.setVisible(false);
 		}
 	}
 

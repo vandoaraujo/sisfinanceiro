@@ -4,6 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import modelo.Usuario;
+import dao.UsuarioDao;
+import exceptions.LoginRepetidoException;
+import exceptions.SenhaException;
 
 import visao.UsuarioCadastroTela;
 
@@ -46,7 +52,12 @@ public class DadosControle implements ActionListener{
 		
 		if(comando.equals(("cadastrar")))
 		{
-			
+			try {
+				alteraDados();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if(comando.equals("retornar"))
 		{
@@ -55,5 +66,48 @@ public class DadosControle implements ActionListener{
 		}
 	}
 	
+	private void alteraDados() throws Exception {
+
+		Usuario usu = vc.leDadosUsuarioLogado(UsuarioDao.getUsuarioLogado());
+		
+		if (usu == null) {
+			JOptionPane.showMessageDialog(null,
+					"Dados invalidos, favor preencher todos os campos!");
+			return;// para sair do método
+
+		} 
+		 else if (usu.getSenha().length() < 4){
+			JOptionPane.showMessageDialog(null, "Senha dever ter no minimo 4 caracteres!");
+			throw new SenhaException("Senha deve ter no minimo 4 caracteres!");   
+		}
+
+		try {
+			verificaLoginRepetido(usu);
+		} catch (LoginRepetidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		UsuarioDao.getInstance().atualizar(usu);
+		// Inicia o usuario Logado
+		UsuarioDao.getInstance().setUsuarioLogado(usu);
+		// Inicia a tela principal/
+		habilitaTelaPrincipal();
+	}	
+	
+	private void habilitaTelaPrincipal() {
+		vc.dispose();
+	}
+	
+	private void verificaLoginRepetido(Usuario usu)
+						throws LoginRepetidoException {
+
+		Usuario usuarioRepetido = UsuarioDao.getInstance().listarLoginsIguais(
+				usu.getLogin());
+
+		if (usuarioRepetido != null) {
+			throw new LoginRepetidoException();
+	}
+}
 
 }

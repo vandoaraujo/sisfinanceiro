@@ -69,7 +69,7 @@ public class DespesaControle implements ActionListener {
 			//Para o caso de atualizar
 			else{
 				
-				vc.leDadosTelaCadastro(despesaCorrente);
+				vc.leDadosTelaCadastroAtualizacao(despesaCorrente);
 				DespesaDao.getInstance().atualizar(despesaCorrente);
 				vc.limpaDespesas();
 				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
@@ -119,14 +119,9 @@ public class DespesaControle implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		if(d != null){
-			vc.populaCamposObjetoBanco(d);
-		}
-		else{
-			JOptionPane.showMessageDialog(null, "Codigo não existe");
-		}
-		
+				
+		vc.populaCamposObjetoBanco(d);
+				
 		return d;
 		
 	}

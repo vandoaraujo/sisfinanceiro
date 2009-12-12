@@ -14,6 +14,7 @@ import visao.TelaPrincipalSisFinanceiro;
 import controle.ControlaSisFinanceiro;
 import controle.LoginControle;
 import dao.HibernateUtil;
+import dao.PeriodoDao;
 
 public class SisFinanceiroMain {
 
@@ -29,6 +30,7 @@ public class SisFinanceiroMain {
 		TelaPrincipalSisFinanceiro visao =new TelaPrincipalSisFinanceiro();
 		ControlaSisFinanceiro.getInstance().configuraTela(visao); 
         LoginControle.getInstance().configuraTela(lt);
+		LoginControle.getInstance().habilitaTelaLogin();
 
 
 		try {
@@ -36,9 +38,6 @@ public class SisFinanceiroMain {
 		} catch (InterruptedException e) {
 			logger.error("Ocorreu um erro no processo da thread");
 		}
-		lt.setVisible(true);
-		//lt.setModal(true);
-		sp.setDisplayString(100, "Instanciando objetos de interface e controle...");
 		sp.hideSplash();
 
 

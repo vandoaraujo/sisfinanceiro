@@ -31,13 +31,7 @@ public class PeriodoTelaControle implements ActionListener {
 		
 	private static void configuraPeriodoAtual() {
 		
-		Iterator it = PeriodoDao.getInstance().listarUltimoPeriodo();
-		Object[] linhas = (Object[]) it.next();
-	    int ano = (Integer) linhas[0];
-	    int mes =(Integer) linhas[1];
-	    Periodo p = new Periodo();
-	    p.setAno(ano);
-	    p.setMes(mes);
+	    Periodo p = PeriodoDao.getInstance().listarUltimoPeriodo2();
 		periodoAtualSelecionado = p;
 		
 	}
@@ -94,7 +88,7 @@ public class PeriodoTelaControle implements ActionListener {
 		if(periodoAtualSelecionado != null)
 			return periodoAtualSelecionado;
 		else
-			return periodoAtualSelecionado = (Periodo) PeriodoDao.getInstance().listarUltimoPeriodo();
+			return periodoAtualSelecionado = (Periodo) PeriodoDao.getInstance().listarUltimoPeriodo2();
 	}
 
 }

@@ -124,11 +124,9 @@ public class DespesaTela extends JDialog {
 	 * @return javax.swing.JCheckBox	
 	 */
 	private JCheckBox getFixaJCheckBox() {
-		if (fixaJCheckBox == null) {
-			fixaJCheckBox = new JCheckBox();
+			fixaJCheckBox = new JCheckBox("fixa",true);
 			fixaJCheckBox.setBounds(new Rectangle(342, 48, 22, 17));
-		}
-		return fixaJCheckBox;
+			return fixaJCheckBox;
 	}
 
 	/**
@@ -198,17 +196,17 @@ public class DespesaTela extends JDialog {
 	}
 
 	public Despesa leDadosTelaCadastro() {
-		String fixaOuVariavel = "";
+		boolean fixaOuVariavel ;
 		
 		//Antes de ler os dados, analisa se estao preenchidos o nome
 		if(dadosObrigatorios()){
 			
 			String nomeDespesa = jTextFieldNovaDespesa.getText();
 			boolean fixa = false;
-			fixaOuVariavel = fixaJCheckBox.getText();
+			fixaOuVariavel = fixaJCheckBox.isSelected();
 			System.out.println("TESTA CHECK " + fixaOuVariavel);
 			
-			if(!fixaOuVariavel.equals("")){
+			if(fixaOuVariavel){
 			
 				fixa = true;
 			}
@@ -226,19 +224,47 @@ public class DespesaTela extends JDialog {
 	
 	public void leDadosTelaCadastro(Despesa d){
 		
-		String fixaOuVariavel = "";
+		boolean fixaOuVariavel;
 		
 		//Antes de ler os dados, analisa se estao preenchidos o nome
 		if(dadosObrigatorios()){
 			
 			String nomeDespesa = jTextFieldNovaDespesa.getText();
 			boolean fixa = false;
-			fixaOuVariavel = fixaJCheckBox.getText();
+			fixaOuVariavel = fixaJCheckBox.isSelected();
 			
-			if(!fixaOuVariavel.equals("")){
+			if(fixaOuVariavel){
 			
 				fixa = true;
 			}
+			d.setNomeDespesa(nomeDespesa);
+			d.setDespesaFixa(fixa);
+		
+		}else{
+				JOptionPane.showMessageDialog(null, "Dados obrigatorios nao preenchidos!");
+		}
+	}
+	
+	public void leDadosTelaCadastroAtualizacao(Despesa d){
+		
+		boolean fixaOuVariavel;
+		
+		//Antes de ler os dados, analisa se estao preenchidos o nome
+		if(dadosObrigatorios()){
+			
+			String nomeDespesa = jTextFieldNovaDespesa.getText();
+			boolean fixa = false;
+			fixaOuVariavel = fixaJCheckBox.isSelected();
+			
+			System.out.println("ANALISA" + fixaOuVariavel);
+			
+			if(fixaOuVariavel){
+			
+				fixa = true;
+			}
+			System.out.println("ANALISA APOS O IF" + fixa);
+
+			
 			d.setNomeDespesa(nomeDespesa);
 			d.setDespesaFixa(fixa);
 		
@@ -259,10 +285,14 @@ public class DespesaTela extends JDialog {
 	public void populaCamposObjetoBanco(Despesa d) {
 		
 		jTextFieldNovaDespesa.setText(d.getNomeDespesa());
-		if(d.isDespesaFixa()){
-			fixaJCheckBox.setEnabled(true);
-		}
+		System.out.println("Valor da despesa Fixa " + d.isDespesaFixa());
 		
+		if(d.isDespesaFixa() == true){
+			getFixaJCheckBox();
+			fixaJCheckBox.setEnabled(true);
+			fixaJCheckBox.isEnabled();
+			System.out.println("ENTROU AQUI!");
+		}
 		excluirJButton.setEnabled(true);
 		excluirJButton.setBackground(Color.GREEN);
 		

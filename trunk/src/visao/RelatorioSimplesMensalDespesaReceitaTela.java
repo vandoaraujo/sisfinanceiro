@@ -58,7 +58,7 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 	private void initialize() {
 		this.setSize(735, 478);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Relatórios Despesa X Receita");
 		column= new Vector();
 		column.add("Nome");
 		column.add("Valor");
@@ -168,6 +168,21 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 			saldoCampo.setBounds(new Rectangle(552, 202, 135, 23));
 		}
 		return saldoCampo;
+	}
+	
+	/**
+	 * This method initializes jScrollPane1	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane1() {
+		if (jScrollPane1 == null) {
+			jScrollPane1 = new JScrollPane();
+			jScrollPane1.setSize(new Dimension(206, 262));
+			jScrollPane1.setViewportView(getJTableReceita());
+			jScrollPane1.setLocation(new Point(38, 109));
+		}
+		return jScrollPane1;
 	}
 	
 	public void configuraOuvinte(ActionListener controle){
@@ -296,20 +311,7 @@ public class RelatorioSimplesMensalDespesaReceitaTela extends JFrame {
 		return jTableDespesas;
 	}
 
-	/**
-	 * This method initializes jScrollPane1	
-	 * 	
-	 * @return javax.swing.JScrollPane	
-	 */
-	private JScrollPane getJScrollPane1() {
-		if (jScrollPane1 == null) {
-			jScrollPane1 = new JScrollPane();
-			jScrollPane1.setSize(new Dimension(206, 262));
-			jScrollPane1.setViewportView(getJTableReceita());
-			jScrollPane1.setLocation(new Point(38, 109));
-		}
-		return jScrollPane1;
-	}
+ 
 
 	/**
 	 * This method initializes jTableReceita	

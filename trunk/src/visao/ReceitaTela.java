@@ -1,42 +1,40 @@
 package visao;
 
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
-
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
-
-import modelo.Despesa;
-import modelo.Receita;
-
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import modelo.DespesaUsuarioPeriodo;
+import modelo.Receita;
+import javax.swing.JTable;
 
 public class ReceitaTela extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
-	private JTextArea jTextAreaReceita = null;
 	private JTextField jTextFieldNovaReceita = null;
-	private JLabel idJLabel = null;
-	private JLabel nomeJLabel = null;
-	private JLabel fixaJLabel = null;
-	private JCheckBox fixaJCheckBox = null;
-	private JLabel fixaLabelNovaReceita = null;
 	private JLabel novaReceitaLabel = null;
 	private JButton cadastrarReceita = null;
 	private JButton alterarReceita = null;
 	private JButton excluirReceita = null;
 	private Font f2;
+	private Vector column;
+	private JScrollPane jScrollPaneReceita = null;
+	private JTable jTableReceita = null;
 	
 	
 	/**
@@ -60,7 +58,11 @@ public class ReceitaTela extends JFrame {
 	private void initialize() {
 		this.setSize(540, 299);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Edição de Receitas");
+		column= new Vector();
+		column.add("Codigo");
+		column.add("Nome");
+		
 	}
 
 	/**
@@ -73,31 +75,15 @@ public class ReceitaTela extends JFrame {
 			novaReceitaLabel = new JLabel();
 			novaReceitaLabel.setBounds(new Rectangle(14, 10, 201, 25));
 			novaReceitaLabel.setText("Digite abaixo uma nova Receita:");
-			fixaLabelNovaReceita = new JLabel();
-			fixaLabelNovaReceita.setBounds(new Rectangle(300, 46, 34, 23));
-			fixaLabelNovaReceita.setText("Fixa:");
-			fixaJLabel = new JLabel();
-			fixaJLabel.setBounds(new Rectangle(298, 83, 70, 20));
-			fixaJLabel.setText("fixa:");
-			nomeJLabel = new JLabel();
-			nomeJLabel.setBounds(new Rectangle(63, 82, 234, 21));
-			nomeJLabel.setText("nome:");
-			idJLabel = new JLabel();
-			idJLabel.setBounds(new Rectangle(10, 82, 52, 21));
-			idJLabel.setText("codigo:");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
-			jContentPane.add(getJTextAreaReceita(), null);
 			jContentPane.add(getJTextFieldNovaReceita(), null);
-			jContentPane.add(idJLabel, null);
-			jContentPane.add(nomeJLabel, null);
-			jContentPane.add(fixaJLabel, null);
-			jContentPane.add(getFixaJCheckBox(), null);
-			jContentPane.add(fixaLabelNovaReceita, null);
 			jContentPane.add(novaReceitaLabel, null);
 			jContentPane.add(getCadastrarReceita(), null);
 			jContentPane.add(getCadastrarReceita1(), null);
 			jContentPane.add(getExcluirReceita(), null);
+			jContentPane.add(getJScrollPaneReceita(), null);
+			desabilitaBotao();
 		}
 		return jContentPane;
 	}
@@ -107,29 +93,6 @@ public class ReceitaTela extends JFrame {
 	}
 
 	/**
-	 * This method initializes jTextAreaReceita	
-	 * 	
-	 * @return javax.swing.JTextArea	
-	 */
-	private JTextArea getJTextAreaReceita() {
-		if (jTextAreaReceita == null) {
-			jTextAreaReceita = new JTextArea();
-			jTextAreaReceita.setBounds(new Rectangle(10, 103, 356, 151));
-			jTextAreaReceita.setEditable(false);
-			jTextAreaReceita.setAlignmentY(50);
-			jTextAreaReceita.setAlignmentX(50);
-			jTextAreaReceita.setFont(f2);
-			jTextAreaReceita.setBackground(Color.YELLOW);
-			JScrollPane jscroll=new JScrollPane(jTextAreaReceita);
-		    jscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			jscroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			
-		}
-		return jTextAreaReceita;
-	}
-
-
-	/**
 	 * This method initializes jTextFieldNovaDespesa	
 	 * 	
 	 * @return javax.swing.JTextField	
@@ -137,22 +100,9 @@ public class ReceitaTela extends JFrame {
 	private JTextField getJTextFieldNovaReceita() {
 		if (jTextFieldNovaReceita == null) {
 			jTextFieldNovaReceita = new JTextField();
-			jTextFieldNovaReceita.setBounds(new Rectangle(10, 45, 289, 27));
+			jTextFieldNovaReceita.setBounds(new Rectangle(10, 45, 352, 27));
 		}
 		return jTextFieldNovaReceita;
-	}
-
-	/**
-	 * This method initializes fixaJCheckBox	
-	 * 	
-	 * @return javax.swing.JCheckBox	
-	 */
-	private JCheckBox getFixaJCheckBox() {
-		if (fixaJCheckBox == null) {
-			fixaJCheckBox = new JCheckBox();
-			fixaJCheckBox.setBounds(new Rectangle(342, 48, 22, 17));
-		}
-		return fixaJCheckBox;
 	}
 
 	/**
@@ -197,29 +147,39 @@ public class ReceitaTela extends JFrame {
 		return excluirReceita;
 	}
 	
-	public void limpaReceitasArea(){
-		   jTextAreaReceita.setText("");
+	public void limpaReceitas(){
+		   jTableReceita.clearSelection();
+		   jTableReceita.removeAll();
+	}
+
+	public void carregaAreaReceitas(List<Receita> receita) {
+		
+		Vector dod = new Vector();
+		Vector linha = new Vector();
+		for(Receita r: receita){
+
+			dod.add((r.getId()));
+			dod.add((r.getNomeReceita()));
+			linha.add(dod);
+			dod = new Vector();
+		
+		}
+		DefaultTableModel modelo = new DefaultTableModel(linha, column); 
+		jTableReceita.setModel(modelo);
+		jTableReceita.getColumnModel().getColumn(0).setPreferredWidth(50);
+		jTableReceita.getColumnModel().getColumn(1).setPreferredWidth(100);
+		
+		
 	}
 
 	public void configuraOuvinte(ActionListener controle){
 			
+			alterarReceita.addActionListener(controle);
+			alterarReceita.setActionCommand("edicao");
 			cadastrarReceita.addActionListener(controle);
 			cadastrarReceita.setActionCommand("confirmar");
-			alterarReceita.addActionListener(controle);
-			alterarReceita.setActionCommand("edição");
 			excluirReceita.addActionListener(controle);
-			alterarReceita.setActionCommand("excluir");
-		
-	}
-	
-	public void carregaAreaReceitas(List<Receita> receitas) {
-		StringBuilder s = new StringBuilder();
-		for(Receita r: receitas){
-			s.append(r.getId() + "\t\t     " + r.getNomeReceita() + "\n ");
-		}
-		
-		String st = s.toString();
-		jTextAreaReceita.append(st);
+			excluirReceita.setActionCommand("excluir");
 		
 	}
 	
@@ -235,29 +195,17 @@ public class ReceitaTela extends JFrame {
 	public void populaCamposObjetoBanco(Receita r) {
 		
 		jTextFieldNovaReceita.setText(r.getNomeReceita());
-		
-		
+		excluirReceita.setEnabled(true);
 	}
 	
 	public Receita leDadosTelaCadastro() {
-		String fixaOuVariavel = "";
 		
 		//Antes de ler os dados, analisa se estao preenchidos o nome
 		if(dadosObrigatorios()){
 			
 			String nomeReceita = jTextFieldNovaReceita.getText();
-			boolean fixa = false;
-			fixaOuVariavel = fixaJCheckBox.getText();
-			System.out.println("TESTA CHECK " + fixaOuVariavel);
-			
-			if(!fixaOuVariavel.equals("")){
-			
-				fixa = true;
-			}
-			
 			Receita rec = new Receita(nomeReceita);
 			return rec;
-		
 		
 		}else{
 				JOptionPane.showMessageDialog(null, "Dados obrigatorios nao preenchidos!");
@@ -268,33 +216,41 @@ public class ReceitaTela extends JFrame {
 	
 	public void leDadosTelaCadastro(Receita r){
 		
-		String fixaOuVariavel = "";
-		
 		//Antes de ler os dados, analisa se estao preenchidos o nome
 		if(dadosObrigatorios()){
 			
 			String nomeReceita = jTextFieldNovaReceita.getText();
-			
 			r.setNomeReceita(nomeReceita);
 			
-		
 		}else{
 				JOptionPane.showMessageDialog(null, "Dados obrigatorios nao preenchidos!");
 		}
 	}
 	
 	/**
-	 * This method initializes excluirJButton	
+	 * This method initializes jScrollPaneReceita	
 	 * 	
-	 * @return javax.swing.JButton	
+	 * @return javax.swing.JScrollPane	
 	 */
-	private JButton getExcluirButton() {
-		if (excluirReceita == null) {
-			excluirReceita = new JButton();
-			excluirReceita.setBounds(new Rectangle(375, 148, 133, 37));
-			excluirReceita.setText("excluir");
+	private JScrollPane getJScrollPaneReceita() {
+		if (jScrollPaneReceita == null) {
+			jScrollPaneReceita = new JScrollPane();
+			jScrollPaneReceita.setBounds(new Rectangle(14, 97, 351, 147));
+			jScrollPaneReceita.setViewportView(getJTableReceita());
 		}
-		return excluirReceita;
+		return jScrollPaneReceita;
+	}
+
+	/**
+	 * This method initializes jTableReceita	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getJTableReceita() {
+		if (jTableReceita == null) {
+			jTableReceita = new JTable();
+		}
+		return jTableReceita;
 	}
 
 

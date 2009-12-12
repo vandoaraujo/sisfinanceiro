@@ -1,9 +1,10 @@
 package visao;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -48,8 +49,6 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 	
 	private JMenuItem sobre = null;
 
-	private JLabel labelImagem = null;
-
 	/**
 	 * This is the default constructor
 	 */
@@ -80,20 +79,13 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			labelImagem = new JLabel();
-			labelImagem.setBounds(new Rectangle(111, 92, 482, 219));
-			labelImagem.setText("");
-			ImageIcon im=new ImageIcon("images\\financasImagem.jpg");
-			LabelImage = new JLabel();
-			LabelImage.setIcon(im);
-			LabelImage.setBounds(new Rectangle(8, 4, 759, 338));
-			LabelImage.setText("");
+			ImageIcon im=new ImageIcon("financasImagem.jpg");
+			LabelImage = new JLabel(im);
+			LabelImage.setBounds(new Rectangle(20, 65, 704, 228));
 			//LabelImage.set
 			jContentPane = new JPanel();
-			jContentPane.setBackground(new Color(0, 200, 125));
-			jContentPane.setLayout(null);
+			//jContentPane.setBackground(new Color(0, 200, 125));
 			jContentPane.add(LabelImage, null);
-			//jContentPane.add(labelImagem, null);
 			
 
 		}

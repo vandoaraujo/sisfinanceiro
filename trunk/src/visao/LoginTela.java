@@ -54,7 +54,7 @@ public class LoginTela extends JFrame {
 	private void initialize() {
 		this.setSize(479, 263);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Tela de Login");
+		this.setTitle("Tela de Login - SisFinanceiro");
 		this.setLocationRelativeTo(null);
 	}
 

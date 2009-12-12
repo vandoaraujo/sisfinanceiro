@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -15,18 +16,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import modelo.Despesa;
+import modelo.Receita;
+import javax.swing.JTable;
 
 public class DespesaTela extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
-	private JTextArea jTextAreaDespesa = null;
 	private JTextField jTextFieldNovaDespesa = null;
-	private JLabel idJLabel = null;
-	private JLabel nomeJLabel = null;
-	private JLabel fixaJLabel = null;
 	private JCheckBox fixaJCheckBox = null;
 	private JLabel fixaLabelNovaDespesa = null;
 	private JLabel novaDespesaLabel = null;
@@ -34,6 +34,10 @@ public class DespesaTela extends JFrame {
 	private JButton alterarDespesa = null;
 	private Font f2;
 	private JButton excluirJButton = null;
+	private JScrollPane jScrollPaneDespesa = null;
+	private JTable jTableDespesa = null;
+	private Vector column;
+
 	/**
 	 * This is the default constructor
 	 */
@@ -55,7 +59,11 @@ public class DespesaTela extends JFrame {
 	private void initialize() {
 		this.setSize(540, 299);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Edição de Despesas");
+		column= new Vector();
+		column.add("Codigo");
+		column.add("Nome");
+		column.add("Fixa");
 	}
 
 	/**
@@ -71,28 +79,16 @@ public class DespesaTela extends JFrame {
 			fixaLabelNovaDespesa = new JLabel();
 			fixaLabelNovaDespesa.setBounds(new Rectangle(300, 46, 34, 23));
 			fixaLabelNovaDespesa.setText("Fixa:");
-			fixaJLabel = new JLabel();
-			fixaJLabel.setBounds(new Rectangle(298, 83, 70, 20));
-			fixaJLabel.setText("fixa:");
-			nomeJLabel = new JLabel();
-			nomeJLabel.setBounds(new Rectangle(63, 82, 234, 21));
-			nomeJLabel.setText("nome:");
-			idJLabel = new JLabel();
-			idJLabel.setBounds(new Rectangle(10, 82, 52, 21));
-			idJLabel.setText("codigo:");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
-			jContentPane.add(getJTextAreaDespesa(), null);
 			jContentPane.add(getJTextFieldNovaDespesa(), null);
-			jContentPane.add(idJLabel, null);
-			jContentPane.add(nomeJLabel, null);
-			jContentPane.add(fixaJLabel, null);
 			jContentPane.add(getFixaJCheckBox(), null);
 			jContentPane.add(fixaLabelNovaDespesa, null);
 			jContentPane.add(novaDespesaLabel, null);
 			jContentPane.add(getCadastrarDespesa(), null);
 			jContentPane.add(getCadastrarDespesa1(), null);
 			jContentPane.add(getExcluirJButton(), null);
+			jContentPane.add(getJScrollPaneDespesa(), null);
 			desabilitaBotao();
 
 		}
@@ -103,29 +99,12 @@ public class DespesaTela extends JFrame {
 		excluirJButton.setEnabled(false);
 	}
 	
-	
-
-	/**
-	 * This method initializes jTextAreaDespesa	
-	 * 	
-	 * @return javax.swing.JTextArea	
-	 */
-	private JTextArea getJTextAreaDespesa() {
-		if (jTextAreaDespesa == null) {
-			jTextAreaDespesa = new JTextArea();
-			jTextAreaDespesa.setBounds(new Rectangle(10, 103, 356, 151));
-			jTextAreaDespesa.setEditable(false);
-			jTextAreaDespesa.setAlignmentY(50);
-			jTextAreaDespesa.setAlignmentX(50);
-			jTextAreaDespesa.setFont(f2);
-			jTextAreaDespesa.setBackground(Color.YELLOW);
-			JScrollPane jscroll=new JScrollPane(jTextAreaDespesa);
-		    jscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			jscroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			
-		}
-		return jTextAreaDespesa;
+	public void limpaDespesas(){
+		   jTableDespesa.clearSelection();
+		   jTableDespesa.removeAll();
 	}
+
+
 
 	/**
 	 * This method initializes jTextFieldNovaDespesa	
@@ -180,10 +159,6 @@ public class DespesaTela extends JFrame {
 		}
 		return alterarDespesa;
 	}
-	
-	public void limpaDespesasArea(){
-		   jTextAreaDespesa.setText("");
-	}
 
 	public void configuraOuvinte(ActionListener controle){
 			
@@ -196,14 +171,26 @@ public class DespesaTela extends JFrame {
 			
 	}
 
-	public void carregaAreaDespesas(List<Despesa> despesas) {
-		StringBuilder s = new StringBuilder();
-		for(Despesa d: despesas){
-			s.append(d.getId() + "\t\t     " + d.getNomeDespesa() + "\t\t   " +  d.isDespesaFixa() + "\n ");
-		}
+
+	public void carregaAreaDespesas(List<Despesa> despesa) {
 		
-		String st = s.toString();
-		jTextAreaDespesa.append(st);
+		Vector dod = new Vector();
+		Vector linha = new Vector();
+		for(Despesa r: despesa){
+
+			dod.add((r.getId()));
+			dod.add((r.getNomeDespesa()));
+			dod.add(r.isDespesaFixa());
+			linha.add(dod);
+			dod = new Vector();
+		
+		}
+		DefaultTableModel modelo = new DefaultTableModel(linha, column); 
+		jTableDespesa.setModel(modelo);
+		jTableDespesa.getColumnModel().getColumn(0).setPreferredWidth(50);
+		jTableDespesa.getColumnModel().getColumn(1).setPreferredWidth(100);
+		jTableDespesa.getColumnModel().getColumn(2).setPreferredWidth(50);
+		
 		
 	}
 
@@ -289,6 +276,32 @@ public class DespesaTela extends JFrame {
 			excluirJButton.setText("excluir");
 		}
 		return excluirJButton;
+	}
+
+	/**
+	 * This method initializes jScrollPaneDespesa	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPaneDespesa() {
+		if (jScrollPaneDespesa == null) {
+			jScrollPaneDespesa = new JScrollPane();
+			jScrollPaneDespesa.setBounds(new Rectangle(13, 99, 341, 146));
+			jScrollPaneDespesa.setViewportView(getJTableDespesa());
+		}
+		return jScrollPaneDespesa;
+	}
+
+	/**
+	 * This method initializes jTableDespesa	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getJTableDespesa() {
+		if (jTableDespesa == null) {
+			jTableDespesa = new JTable();
+		}
+		return jTableDespesa;
 	}
 	
 	

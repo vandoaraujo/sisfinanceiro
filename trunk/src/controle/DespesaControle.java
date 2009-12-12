@@ -7,6 +7,8 @@ import java.util.jar.JarInputStream;
 
 import javax.swing.JOptionPane;
 
+import org.hibernate.ObjectNotFoundException;
+
 import modelo.Despesa;
 import visao.DespesaTela;
 import dao.DespesaDao;
@@ -59,7 +61,7 @@ public class DespesaControle implements ActionListener {
 				
 				Despesa d = vc.leDadosTelaCadastro();
 				DespesaDao.getInstance().salvar(d);
-				vc.limpaDespesasArea();
+				vc.limpaDespesas();
 				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
 				vc.carregaAreaDespesas(novasDespesas);
 			}
@@ -68,7 +70,7 @@ public class DespesaControle implements ActionListener {
 				
 				vc.leDadosTelaCadastro(despesaCorrente);
 				DespesaDao.getInstance().atualizar(despesaCorrente);
-				vc.limpaDespesasArea();
+				vc.limpaDespesas();
 				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
 				vc.carregaAreaDespesas(novasDespesas);
 				despesaCorrente = null;
@@ -80,7 +82,7 @@ public class DespesaControle implements ActionListener {
 			
 			if(despesaCorrente != null){
 				DespesaDao.getInstance().deletar(despesaCorrente);
-				vc.limpaDespesasArea();
+				vc.limpaDespesas();
 				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
 				vc.carregaAreaDespesas(novasDespesas);
 				JOptionPane.showMessageDialog(null,"Deletado com sucesso");
@@ -105,12 +107,24 @@ public class DespesaControle implements ActionListener {
 		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o codigo da Despesa"));
 		Despesa d = null;
 		try {
-			d = DespesaDao.getInstance().BuscaDespesaId(codigo);
-		} catch (Exception e) {
+			try {
+				d = DespesaDao.getInstance().BuscaDespesaId(codigo);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		catch (org.hibernate.ObjectNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		vc.populaCamposObjetoBanco(d);
+		
+		if(d != null){
+			vc.populaCamposObjetoBanco(d);
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Codigo não existe");
+		}
 		
 		return d;
 		

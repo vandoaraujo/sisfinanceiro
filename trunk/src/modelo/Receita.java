@@ -14,9 +14,12 @@ public class Receita {
 	
 	private String nomeReceita;
 	
-	public Receita(String nomeDespesa){
-		
+	public Receita(String nomeReceita){
 		this.nomeReceita = nomeReceita;
+	}
+	
+	public Receita(){
+		
 	}
 
 	public int getId() {

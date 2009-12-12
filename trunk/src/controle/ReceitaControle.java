@@ -63,16 +63,16 @@ public class ReceitaControle implements ActionListener{
 				
 				Receita r = vc.leDadosTelaCadastro();
 				ReceitaDao.getInstance().salvar(r);
-				vc.limpaReceitasArea();
+				vc.limpaReceitas();
 				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
 				vc.carregaAreaReceitas(novasReceitas);
 			}
 			//Para o caso de atualizar
 			else{
 				
-				vc.leDadosTelaCadastro();
+				vc.leDadosTelaCadastro(receitaCorrente);
 				ReceitaDao.getInstance().atualizar(receitaCorrente);
-				vc.limpaReceitasArea();
+				vc.limpaReceitas();
 				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
 				vc.carregaAreaReceitas(novasReceitas);
 				receitaCorrente = null;
@@ -84,7 +84,7 @@ public class ReceitaControle implements ActionListener{
 			
 			if(receitaCorrente != null){
 				ReceitaDao.getInstance().deletar(receitaCorrente);
-				vc.limpaReceitasArea();
+				vc.limpaReceitas();
 				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
 				vc.carregaAreaReceitas(novasReceitas);
 				JOptionPane.showMessageDialog(null,"Deletado com sucesso");
@@ -97,10 +97,6 @@ public class ReceitaControle implements ActionListener{
 	private void analisaMudancaObjetoReceita(Receita r) {
 		
 		Receita receitaTela = vc.leDadosTelaCadastro();
-		
-			
-		
-		
 	}
 	
 	private Receita alteraReceita() {

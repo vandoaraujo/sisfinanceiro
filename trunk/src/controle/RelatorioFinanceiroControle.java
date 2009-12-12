@@ -12,7 +12,6 @@ import modelo.DespesaUsuarioPeriodo;
 import modelo.Periodo;
 import modelo.ReceitaUsuarioPeriodo;
 import modelo.Usuario;
-import util.NumberUtil;
 import visao.RelatorioSimplesMensalDespesaReceitaTela;
 import dao.PeriodoDao;
 import dao.UsuarioDao;

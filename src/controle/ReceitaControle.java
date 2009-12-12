@@ -42,6 +42,7 @@ public class ReceitaControle implements ActionListener{
 	}
 		
 	public void habilita(){
+		vc.setModal(true);
 		vc.setVisible(true);
 	}
 

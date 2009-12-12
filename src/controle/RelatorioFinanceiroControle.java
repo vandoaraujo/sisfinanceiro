@@ -1,5 +1,6 @@
 package controle;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.math.RoundingMode;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import modelo.DespesaUsuarioPeriodo;
 import modelo.Periodo;
@@ -42,6 +44,7 @@ public class RelatorioFinanceiroControle implements ActionListener {
 	}
 		
 	public void habilita(){
+		vc.setModal(true);
 		vc.setVisible(true);
 	}
 			
@@ -93,12 +96,30 @@ public class RelatorioFinanceiroControle implements ActionListener {
 			vc.carregaAreaDespesas(despesasUsuarioPeriodo);
 			vc.carregaAreaReceitas(receitasUsuarioPeriodo);
 			vc.populaResultados(totalR, totalD, valorFinal);
+			
+			//efetuaTrocaCor
+			preencheCorConformeSaldo(valorFinal);
+
 		}
 		else{
 			vc.limpaTela();
 			JOptionPane.showMessageDialog(null,"Não há registros no período informado!" );
 		}
 		
+		
+	}
+
+	private void preencheCorConformeSaldo(double valorFinal) {
+		
+		JTextField campoSaldo = vc.trocaCorSaldo();
+		if(valorFinal > 0){
+			campoSaldo.setBackground(Color.GREEN);
+			JOptionPane.showMessageDialog(null, "Parabéns, você está com saldo!!!");
+		}
+		else{
+			campoSaldo.setBackground(Color.RED);
+			JOptionPane.showMessageDialog(null, "Cuidado, você está com prejuízo!!!");
+		}
 		
 	}
 

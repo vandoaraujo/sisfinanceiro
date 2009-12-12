@@ -1,18 +1,19 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import modelo.Periodo;
 
-public class TrocarPeriodoTela extends JFrame {
+public class TrocarPeriodoTela extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -45,13 +46,14 @@ public class TrocarPeriodoTela extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			periodoLabel = new JLabel();
+			periodoLabel = new JLabel("<html>Utilize a lista abaixo para trocar o período corrente, caso queira definir despesas ou receitas anteriores. Após isso cadastre sua despesa ou receita.</html>");
 			periodoLabel.setBounds(new Rectangle(6, 8, 533, 52));
-			periodoLabel.setText("Utilize a lista abaixo para trocar o período corrente, caso queira definir despesas ou receitas anteriores.");
+			periodoLabel.setBackground(new Color(0, 30, 218));
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(getPeriodoCombo(), null);
 			jContentPane.add(getTrocarPeriodoBotao(), null);
+			jContentPane.setBackground(new Color(0, 156, 218));
 			jContentPane.add(periodoLabel, null);
 		}
 		return jContentPane;
@@ -66,6 +68,9 @@ public class TrocarPeriodoTela extends JFrame {
 		if (periodoCombo == null) {
 			periodoCombo = new JComboBox();
 			periodoCombo.setBounds(new Rectangle(113, 83, 308, 31));
+			periodoCombo.setBackground(Color.YELLOW);
+
+			
 		}
 		return periodoCombo;
 	}
@@ -78,7 +83,8 @@ public class TrocarPeriodoTela extends JFrame {
 	private JButton getTrocarPeriodoBotao() {
 		if (trocarPeriodoBotao == null) {
 			trocarPeriodoBotao = new JButton();
-			trocarPeriodoBotao.setBounds(new Rectangle(226, 129, 101, 28));
+			trocarPeriodoBotao.setBackground(Color.GREEN);
+			trocarPeriodoBotao.setBounds(new Rectangle(207, 139, 133, 38));
 			trocarPeriodoBotao.setText("OK!");
 		}
 		return trocarPeriodoBotao;

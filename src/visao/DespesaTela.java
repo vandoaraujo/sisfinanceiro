@@ -9,20 +9,18 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Despesa;
-import modelo.Receita;
-import javax.swing.JTable;
 
-public class DespesaTela extends JFrame {
+public class DespesaTela extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -89,6 +87,7 @@ public class DespesaTela extends JFrame {
 			jContentPane.add(getCadastrarDespesa1(), null);
 			jContentPane.add(getExcluirJButton(), null);
 			jContentPane.add(getJScrollPaneDespesa(), null);
+			jContentPane.setBackground(new Color(0, 156, 218));
 			desabilitaBotao();
 
 		}
@@ -142,6 +141,8 @@ public class DespesaTela extends JFrame {
 			cadastrarDespesa = new JButton();
 			cadastrarDespesa.setBounds(new Rectangle(373, 42, 135, 35));
 			cadastrarDespesa.setText("confirmar");
+			cadastrarDespesa.setBackground(Color.GREEN);
+
 		}
 		return cadastrarDespesa;
 	}
@@ -156,6 +157,8 @@ public class DespesaTela extends JFrame {
 			alterarDespesa = new JButton();
 			alterarDespesa.setBounds(new Rectangle(374, 96, 135, 36));
 			alterarDespesa.setText("edição");
+			alterarDespesa.setBackground(Color.YELLOW);
+
 		}
 		return alterarDespesa;
 	}
@@ -261,6 +264,7 @@ public class DespesaTela extends JFrame {
 		}
 		
 		excluirJButton.setEnabled(true);
+		excluirJButton.setBackground(Color.GREEN);
 		
 	}
 
@@ -274,6 +278,8 @@ public class DespesaTela extends JFrame {
 			excluirJButton = new JButton();
 			excluirJButton.setBounds(new Rectangle(375, 148, 133, 37));
 			excluirJButton.setText("excluir");
+			excluirJButton.setBackground(Color.LIGHT_GRAY);
+
 		}
 		return excluirJButton;
 	}

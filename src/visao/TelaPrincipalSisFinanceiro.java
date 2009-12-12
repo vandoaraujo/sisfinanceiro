@@ -1,11 +1,12 @@
 package visao;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -13,7 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-public class TelaPrincipalSisFinanceiro extends JFrame {
+public class TelaPrincipalSisFinanceiro extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -28,8 +29,6 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 	private JMenu menuFinancasUsuario = null;
 	
 	private JMenu menuEstatisticasRelatorio = null;
-	
-	private JLabel LabelImage = null;
 	
 	private JMenuItem subMenuCadastroReceita = null;  //  @jve:decl-index=0:visual-constraint="811,11"
 	
@@ -49,12 +48,14 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 	
 	private JMenuItem sobre = null;
 
+	private JLabel jLabelImagem = null;
+
 	/**
 	 * This is the default constructor
 	 */
 	public TelaPrincipalSisFinanceiro() {
 		super();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		initialize();
 	}
 
@@ -65,7 +66,7 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 	 */
 	private void initialize() {
 		
-		this.setSize(780, 405);
+		this.setSize(568, 405);
 		this.setJMenuBar(getPrincipalMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("SisFinanceiro - Controle Financeiro Pessoal");
@@ -79,13 +80,14 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			ImageIcon im=new ImageIcon("financasImagem.jpg");
-			LabelImage = new JLabel(im);
-			LabelImage.setBounds(new Rectangle(20, 65, 704, 228));
-			//LabelImage.set
+			jLabelImagem = new JLabel();
+			jLabelImagem.setBounds(new Rectangle(2, 1, 563, 344));
+			jLabelImagem.setText("");
 			jContentPane = new JPanel();
-			//jContentPane.setBackground(new Color(0, 200, 125));
-			jContentPane.add(LabelImage, null);
+			jContentPane.setLayout(null);
+			jContentPane.setBackground(new Color(0, 156, 218));
+			jContentPane.add(jLabelImagem, null);
+			jLabelImagem.setIcon(new ImageIcon("..\\sisfinanceiro\\src\\images\\imagem.jpg"));
 			
 
 		}
@@ -254,4 +256,4 @@ public class TelaPrincipalSisFinanceiro extends JFrame {
 		
 	}
 	
-}  //  @jve:decl-index=0:visual-constraint="21,38"
+}  //  @jve:decl-index=0:visual-constraint="143,44"

@@ -3,6 +3,8 @@ package controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import visao.SobreTela;
 
 public class SobreControle implements ActionListener{
@@ -32,6 +34,7 @@ public class SobreControle implements ActionListener{
 	}
 		
 	public void habilita(){
+		vc.setModal(true);
 		vc.setVisible(true);
 	}
 			
@@ -42,13 +45,14 @@ public class SobreControle implements ActionListener{
 
 		String comando = eve.getActionCommand();
 		
-		if(comando.equals(("")))
+		if(comando.equals(("mais")))
 		{
-			
+			JOptionPane.showMessageDialog(null, " Sistema Controle Financeiro \n\n \n Sistema desenvolvido utilizando os seguintes conceitos:\t \n * o pattern DAO \n * conceitos de 3 Camadas \n * aplicação de singleton \n * \n * implementação de login \n * utilização de Hibernate");
+
 		}
-		else if(comando.equals(""))
+		else if(comando.equals("contato"))
 		{
-			
+			JOptionPane.showMessageDialog(null, "Para bugs, melhorias, novas versões: \n e-mail: vandoaraujo@hotmail.com ");
 		}
 	}
 

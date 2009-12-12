@@ -8,21 +8,18 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import modelo.DespesaUsuarioPeriodo;
 import modelo.Receita;
-import javax.swing.JTable;
 
-public class ReceitaTela extends JFrame {
+public class ReceitaTela extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -83,6 +80,7 @@ public class ReceitaTela extends JFrame {
 			jContentPane.add(getCadastrarReceita1(), null);
 			jContentPane.add(getExcluirReceita(), null);
 			jContentPane.add(getJScrollPaneReceita(), null);
+			jContentPane.setBackground(new Color(0, 156, 218));
 			desabilitaBotao();
 		}
 		return jContentPane;
@@ -115,6 +113,8 @@ public class ReceitaTela extends JFrame {
 			cadastrarReceita = new JButton();
 			cadastrarReceita.setBounds(new Rectangle(373, 42, 135, 35));
 			cadastrarReceita.setText("confirmar");
+			cadastrarReceita.setBackground(Color.GREEN);
+
 		}
 		return cadastrarReceita;
 	}
@@ -129,6 +129,8 @@ public class ReceitaTela extends JFrame {
 			alterarReceita = new JButton();
 			alterarReceita.setBounds(new Rectangle(374, 87, 135, 36));
 			alterarReceita.setText("edicao");
+			alterarReceita.setBackground(Color.YELLOW);
+
 		}
 		return alterarReceita;
 	}
@@ -143,6 +145,8 @@ public class ReceitaTela extends JFrame {
 			excluirReceita = new JButton();
 			excluirReceita.setText("excluir");
 			excluirReceita.setBounds(new Rectangle(374, 136, 133, 37));
+			excluirReceita.setBackground(Color.LIGHT_GRAY);
+
 		}
 		return excluirReceita;
 	}
@@ -196,6 +200,7 @@ public class ReceitaTela extends JFrame {
 		
 		jTextFieldNovaReceita.setText(r.getNomeReceita());
 		excluirReceita.setEnabled(true);
+		excluirReceita.setBackground(Color.GREEN);
 	}
 	
 	public Receita leDadosTelaCadastro() {

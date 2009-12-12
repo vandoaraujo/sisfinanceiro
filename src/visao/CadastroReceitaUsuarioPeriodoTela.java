@@ -1,19 +1,17 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -21,7 +19,7 @@ import modelo.Periodo;
 import modelo.Receita;
 import util.UsuarioPeriodoReceitaTO;
 
-public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
+public class CadastroReceitaUsuarioPeriodoTela extends JDialog {
 	
 	
 
@@ -88,6 +86,8 @@ public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 			jContentPane.add(getPeriodoCombo(), null);
 			jContentPane.add(periodoLabel, null);
 			jContentPane.add(getVoltarBotao(), null);
+			jContentPane.setBackground(new Color(0, 156, 218));
+
 		}
 		return jContentPane;
 	}
@@ -101,6 +101,11 @@ public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 		if (areaTex == null) {
 			areaTex = new JTextArea();
 			areaTex.setBounds(new Rectangle(155, 118, 265, 98));
+			areaTex.setBackground(Color.YELLOW);
+			areaTex.setBounds(new Rectangle(155, 118, 265, 98));
+			JScrollPane jscroll=new JScrollPane(areaTex);
+		    jscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			jscroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		}
 		return areaTex;
 	}
@@ -141,6 +146,8 @@ public class CadastroReceitaUsuarioPeriodoTela extends JFrame {
 			okCadastro = new JButton();
 			okCadastro.setBounds(new Rectangle(460, 15, 112, 34));
 			okCadastro.setText("Cadastro");
+			okCadastro.setBackground(Color.GREEN);
+
 		}
 		return okCadastro;
 	}

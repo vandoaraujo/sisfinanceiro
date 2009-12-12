@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import modelo.Despesa;
 import modelo.DespesaUsuarioPeriodo;
 import modelo.DespesaUsuarioPeriodoPK;
@@ -75,10 +77,13 @@ public class DespesaUsuarioPeriodoControle implements ActionListener {
 			
 			DespesaPertenceUsuarioEmPeriodoDao.getInstance().salvar(rUP);
 			
+			JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+			
+			
 		}
 		else if(comando.equals("retornar"))
 		{
-			
+			vc.setVisible(false);
 		}
 	}
 	

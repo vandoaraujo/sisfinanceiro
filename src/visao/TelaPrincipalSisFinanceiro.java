@@ -209,7 +209,7 @@ public class TelaPrincipalSisFinanceiro extends JDialog {
 	private JMenuItem getPeriodo(){
 		if(subMenuPeriodos==null){
 			subMenuPeriodos=new JMenuItem();
-			subMenuPeriodos.setText("Tabela Períodos...");
+			subMenuPeriodos.setText("Incrementar um Novo Período...");
 			subMenuPeriodos.setMnemonic(KeyEvent.VK_O);
 		}
 		return subMenuPeriodos;

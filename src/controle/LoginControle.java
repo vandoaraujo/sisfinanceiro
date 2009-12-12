@@ -35,18 +35,18 @@ public class LoginControle implements ActionListener {
 	public void configuraTela(LoginTela telaL) {
 
 		this.telaL = telaL;
-		// telaL.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.telaL.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		telaL.configuraOuvinte(this);
 		// Proíbe Redimensionamento
-		telaL.setResizable(false);
-		telaL.setLocationRelativeTo(null);
+		this.telaL.setResizable(false);
+		this.telaL.setLocationRelativeTo(null);
 
 	}
 
 	private void configuraTela(UsuarioCadastroTela usuTela) {
 
 		this.telaUsuario = usuTela;
-		telaUsuario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//telaUsuario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		telaUsuario.configuraOuvinte(this);
 		// Proíbe Redimensionamento
 		telaUsuario.setResizable(false);
@@ -54,7 +54,7 @@ public class LoginControle implements ActionListener {
 	}
 
 	public void habilitaTelaLogin() {
-		telaL.setModal(true);
+		
 		telaL.setVisible(true);
 		telaL.limpaCredenciais();
 
@@ -97,9 +97,9 @@ public class LoginControle implements ActionListener {
 		}
 		
 		else if (!validaCaracters(usu.getSenha())){
-		JOptionPane.showMessageDialog(null,
-		"Caracteres inválidos!");
-		return;// para sair do método
+			JOptionPane.showMessageDialog(null,
+			"Caracteres inválidos!");
+			return;// para sair do método
 		
 		}else if (usu.getSenha().length() < 4){
 			JOptionPane.showMessageDialog(null, "Senha dever ter no minimo 4");

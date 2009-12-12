@@ -53,7 +53,7 @@ public class SobreTela extends JDialog {
 			jLabelTitulo.setText("SisFinanceiro - Versão 1.0 - Projeto Final Curso TBDS - PUC");
 			jLabelSobre = new JLabel();
 			jLabelSobre.setBounds(new Rectangle(516, 43, 129, 114));
-			jLabelSobre.setText("<html><div> Contruído por:<br><br> Vando Araujo<br>Luiz Perciliano<br>Fabio Correa<br>Geovana</html>");
+			jLabelSobre.setText("<html><div> Construído por:<br><br> Vando Araujo<br>Luiz Perciliano<br>Fabio Correa<br>Geovana</html>");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(jLabelSobre, null);

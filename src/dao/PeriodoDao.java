@@ -2,7 +2,6 @@ package dao;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import modelo.DespesaUsuarioPeriodo;
 import modelo.Periodo;
@@ -10,6 +9,7 @@ import modelo.ReceitaUsuarioPeriodo;
 import modelo.Usuario;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -93,9 +93,28 @@ public class PeriodoDao {
 	    public Iterator listarUltimoPeriodo() {
 
 	    	Iterator maxObject = session.createQuery(
-	    		"select max(ano),max(mes) from modelo.Periodo").list().iterator();
+	    		"select max(ano),max(mes) from modelo.Periodo group by ano,mes").list().iterator();
 	    	return maxObject;
 
+	    }
+	    
+	    public Periodo listarUltimoPeriodo2(){
+	    	
+	    	Integer pAno = (Integer) session.createQuery(
+    		"select max(ano) from modelo.Periodo").uniqueResult();
+	    	
+	    	Integer p =(Integer) session.createSQLQuery(
+    		"select max(p.mes) from Periodo p where p.ano=:ano"). 
+    		setInteger("ano", pAno).uniqueResult();
+	    	
+	    	System.out.println("ANO " + p.intValue());
+	    	System.out.println("MES " + pAno.intValue());
+	    	
+	    	Periodo periodo = new Periodo();
+	    	periodo.setMes(p.intValue());
+	    	periodo.setAno(pAno.intValue());
+	    	
+	    	return periodo;
 	    }
 
 		public List<DespesaUsuarioPeriodo> buscaDespesasPeriodo(Periodo p,Usuario usu) {

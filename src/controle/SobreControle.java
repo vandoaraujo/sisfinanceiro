@@ -47,7 +47,7 @@ public class SobreControle implements ActionListener{
 		
 		if(comando.equals(("mais")))
 		{
-			JOptionPane.showMessageDialog(null, " Sistema Controle Financeiro \n\n \n Sistema desenvolvido utilizando os seguintes conceitos:\t \n * o pattern DAO \n * conceitos de 3 Camadas \n * aplicação de singleton \n * \n * implementação de login \n * utilização de Hibernate");
+			JOptionPane.showMessageDialog(null, " Sistema Controle Financeiro \n\n \n Sistema desenvolvido utilizando os seguintes conceitos:\t \n * o pattern DAO \n * conceitos de 3 Camadas \n * aplicação de singleton \n * implementação de login \n * utilização de Hibernate");
 
 		}
 		else if(comando.equals("contato"))

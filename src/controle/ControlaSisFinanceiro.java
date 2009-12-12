@@ -2,9 +2,11 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import modelo.Despesa;
 import modelo.Periodo;
@@ -82,14 +84,18 @@ public class ControlaSisFinanceiro implements ActionListener {
 		}
 		else if(comando.equals("tabelaPeriodos"))
 		{
-			
+			Periodo  per= criaNovoPeriodo();
+			PeriodoDao.getInstance().salvar(per);
+			JOptionPane.showMessageDialog(null, "Novo período " + per.getMes() + "/" + per.getAno()+ " criado com sucesso!" );
 		}
 		else if(comando.equals("dadosUsuario")){
 			
 			UsuarioCadastroTela visao = new UsuarioCadastroTela();
 			DadosControle.getInstance().configuraTela(visao);
-			//UsuarioDao usuarioDao = UsuarioDao.getUsuarioLogado();
+			Usuario usuarioLogado = UsuarioDao.getUsuarioLogado();
+			visao.populaCamposUsuario(usuarioLogado);
 			DadosControle.getInstance().habilita();
+
 		}
 		else if(comando.equals("trocarPeriodo")){
 			
@@ -135,6 +141,30 @@ public class ControlaSisFinanceiro implements ActionListener {
 			SobreControle.getInstance().habilita();
 			
 		}
+	}
+	
+	private Periodo criaNovoPeriodo() {
+		
+		Periodo p= PeriodoDao.getInstance().listarUltimoPeriodo2();
+	    
+	    System.out.println("MES " + p.getMes());
+	    System.out.println("ano " + p.getAno());
+	    
+	    //analisa dezembro
+	    if(p.getMes() == 12){
+	    	p.setMes(1);
+	    	p.setAno(p.getAno() + 1);
+	    }
+	    else{
+	    	p.setMes(p.getMes() + 1);
+	    }
+	    
+	    
+	    System.out.println("MES " + p.getMes());
+	    System.out.println("ano " + p.getAno());
+	    
+	    return p;
+		
 	}
 	
 	

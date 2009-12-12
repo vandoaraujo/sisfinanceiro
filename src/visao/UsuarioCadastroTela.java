@@ -8,11 +8,13 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import modelo.Usuario;
+import exceptions.SenhaException;
 
 public class UsuarioCadastroTela extends JDialog {
 
@@ -195,6 +197,12 @@ public class UsuarioCadastroTela extends JDialog {
 		retornar.setActionCommand("retornar");
 
 	}
+	
+	public void populaCamposUsuario(Usuario usu){
+		nome.setText(usu.getNome());
+		login.setText(usu.getLogin());
+		
+	}
 
 	public Usuario leDadosUsuario() {
 		//getText Depecated - implementar array de caracteres
@@ -204,7 +212,7 @@ public class UsuarioCadastroTela extends JDialog {
 		String senhaUsu = new String(senha.getPassword());
 		String confiSenha = new String (senhaNovamente.getPassword());
 		
-		// validando os campos vazios e senhas difirentes
+		// validando os campos vazios e senhas diferentes
 		if (nomeUsuario.trim().equals("")
 				|| loginUsuario.trim().equals("")
 				|| senhaUsu.trim().equals("")
@@ -217,6 +225,32 @@ public class UsuarioCadastroTela extends JDialog {
 		
 		else {
 			usuario = new Usuario(nomeUsuario, loginUsuario, senhaUsu, new Date());
+		}
+		return usuario;
+	}
+	
+	public Usuario leDadosUsuarioLogado(Usuario usuario) throws Exception {
+
+		String nomeUsuario = nome.getText();
+		String loginUsuario = login.getText();
+		String senhaUsu = new String(senha.getPassword());
+		String confiSenha = new String (senhaNovamente.getPassword());
+		
+		// validando os campos vazios e senhas diferentes
+		if (nomeUsuario.trim().equals("")
+				|| loginUsuario.trim().equals("")
+				|| senhaUsu.trim().equals("")
+				|| confiSenha.trim().equals("")){
+			return null;
+			//
+		}else if(!senhaUsu.equals(confiSenha)){
+			JOptionPane.showMessageDialog(null, "Senhas não conferem");
+			throw new SenhaException("Senhas não conferem");
+		}
+		else {
+			usuario.setNome(nomeUsuario);
+			usuario.setLogin(loginUsuario);
+			usuario.setSenha(senhaUsu);
 		}
 		return usuario;
 	}

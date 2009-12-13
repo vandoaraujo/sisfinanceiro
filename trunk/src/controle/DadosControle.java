@@ -2,6 +2,8 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -80,7 +82,11 @@ public class DadosControle implements ActionListener{
 			JOptionPane.showMessageDialog(null, "Senha dever ter no minimo 4 caracteres!");
 			throw new SenhaException("Senha deve ter no minimo 4 caracteres!");   
 		}
-
+		else if (!validaCaracters(usu.getSenha())){
+				JOptionPane.showMessageDialog(null,
+				"Caracteres inválidos!");
+			throw new SenhaException("Caracteres inválidos!! ");
+		}
 		try {
 			verificaLoginRepetido(usu);
 		} catch (LoginRepetidoException e) {
@@ -107,7 +113,19 @@ public class DadosControle implements ActionListener{
 
 		if (usuarioRepetido != null) {
 			throw new LoginRepetidoException();
+		}
 	}
-}
+	
+	private boolean validaCaracters(String strSenha) {
+		Pattern p = Pattern.compile("[^_^0-9^a-z^A-Z ^]");
+		int x = strSenha.length();
+		Matcher m = p.matcher(strSenha);
+		for (int i = 0; i < x; i++) {
+			if (m.find()) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 }

@@ -202,16 +202,7 @@ public class CadastroReceitaUsuarioPeriodoTela extends JDialog {
 			
 			double valorReceita = Double.parseDouble(valor);
 			
-			//NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale ("pt", "BR"));   
-			//String s = nf.format (12345.67); // s recebe "R$ 12.345,67"  
-			//double d = nf.parse (valor).doubleValue(); // d recebe 12345.67*/
-			
-			/*BigDecimal soma;
-			soma = new BigDecimal(0.0);
-			soma.setScale(2, RoundingMode.FLOOR);
-			soma = soma.add(augend));*/
-			
-			//valorReceita = truncate(valorReceita, 2);
+			validaValorNegativo(valorReceita);
 			
 			System.out.println(valorReceita);
 			
@@ -238,6 +229,10 @@ public class CadastroReceitaUsuarioPeriodoTela extends JDialog {
 		catch(NullPointerException e){
 			JOptionPane.showMessageDialog(null, "O campo valor deve ser preenchido no formato R$ 0.00");
 		}
+		catch(IllegalArgumentException e){
+			JOptionPane.showMessageDialog(null, "O campo valor deve ser maior do que R$ 0.00");
+
+		}
 		catch(Exception e){
 			JOptionPane.showMessageDialog(null, "Erro obtendo dados da tela!");
 		}
@@ -252,6 +247,19 @@ public class CadastroReceitaUsuarioPeriodoTela extends JDialog {
 		
 		for(Receita r : receita){
 			receitaCombo.addItem(r.getNomeReceita());
+		}
+		
+	}
+	
+	
+	private void validaValorNegativo(double valorReceita) {
+		
+		if(valorReceita <= 0){
+			throw new IllegalArgumentException("A receita está com uma valor menor que R$ 0.01");
+		}
+		if(valorReceita <= 0.0){
+			throw new IllegalArgumentException("A receita está com uma valor menor que R$ 0.01");
+
 		}
 		
 	}

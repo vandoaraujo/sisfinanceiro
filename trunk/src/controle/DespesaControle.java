@@ -12,6 +12,7 @@ import org.hibernate.ObjectNotFoundException;
 import modelo.Despesa;
 import visao.DespesaTela;
 import dao.DespesaDao;
+import dao.DespesaPertenceUsuarioEmPeriodoDao;
 
 public class DespesaControle implements ActionListener {
 	
@@ -82,16 +83,29 @@ public class DespesaControle implements ActionListener {
 		else if(comando.equals("excluir")){
 			
 			if(despesaCorrente != null){
-				DespesaDao.getInstance().deletar(despesaCorrente);
-				vc.limpaDespesas();
-				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
-				vc.carregaAreaDespesas(novasDespesas);
-				JOptionPane.showMessageDialog(null,"Deletado com sucesso");
-				
+				if(validaUtilizacaoDespesa(despesaCorrente)){
+					
+						DespesaDao.getInstance().deletar(despesaCorrente);
+						vc.limpaDespesas();
+						List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
+						vc.carregaAreaDespesas(novasDespesas);
+						JOptionPane.showMessageDialog(null,"Deletado com sucesso");
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Esta despesa já foi utilizada e não pode ser deletada!");
+				}
 			}
 				despesaCorrente = null;
 		}
 
+	}
+
+	private boolean validaUtilizacaoDespesa(Despesa despesaCorrente2) {
+		List<Despesa> d = DespesaPertenceUsuarioEmPeriodoDao.getInstance().buscaDespesaId(despesaCorrente2.getId());
+		if(d.size() == 0){
+			return true;
+		}
+		return false;
 	}
 
 	private void analisaMudancaObjetoDespesa(Despesa d) {

@@ -18,28 +18,38 @@ depois vc usa aquela interface grafica dele para gerar as tabelas, na url do ban
 
 
 
-INSERT INTO despesa VALUES (1, false, 'Luz');
-INSERT INTO despesa VALUES (2, false,'Telefone Fixo');
-INSERT INTO despesa VALUES (3, true, 'Empregada');
-INSERT INTO despesa VALUES (4, false, 'Cartão de Crédito');
-INSERT INTO despesa VALUES (5, false, 'Despesas Bancárias');
-INSERT INTO despesa VALUES (6, true, 'Transporte escolar');
-INSERT INTO despesa VALUES (7, true, 'Condominio');
-INSERT INTO despesa VALUES (8, true, 'Tv a cabo');
-INSERT INTO despesa VALUES (9, true, 'Internet');
-INSERT INTO despesa VALUES (10, true, 'Academia');
-INSERT INTO despesa VALUES (11, false, 'Supermercado');
-INSERT INTO despesa VALUES (12, true, 'Contador');
-INSERT INTO despesa VALUES (13, false, 'Impostos Gerais');
-INSERT INTO despesa VALUES (14, false, 'Despesas Médicas');
-INSERT INTO despesa VALUES (15, true, 'Escola');
-INSERT INTO despesa VALUES (16, true, 'Faculdade');
-INSERT INTO despesa VALUES (17, false, 'Agua');
-INSERT INTO despesa VALUES (18, false, 'Celular');
-INSERT INTO despesa VALUES (19, false, 'IPVA');
-INSERT INTO despesa VALUES (20, false, 'IPTU');
-INSERT INTO despesa VALUES (21, false, 'Transporte - Condução');
-
+INSERT INTO DESPESA (id, nome, despesaFixa) //os campos pra servir de base...
+              VALUES (41, true, 'Aluguel');
+INSERT INTO DESPESA VALUES (2, true, 'Prestação - Casa');
+INSERT INTO DESPESA VALUES (3, true, 'Condomínio');
+INSERT INTO DESPESA VALUES (4, true, 'Prestação - Carro');
+INSERT INTO DESPESA VALUES(5, true, 'Seguro Automóvel');
+INSERT INTO DESPESA VALUES(6, true, 'Seguro Vida');
+INSERT INTO DESPESA VALUES(7, true, 'Previdência Privada');
+INSERT INTO DESPESA VALUES(8, true, 'Assistência Funerária'); 
+INSERT INTO DESPESA VALUES(9, true, 'Plano de Saúde');
+INSERT INTO DESPESA VALUES(10, true, 'Plano Odontológico');
+INSERT INTO DESPESA VALUES(11, false,  'IPVA'); 
+INSERT INTO DESPESA VALUES(13, true, 'Taxa de Incêndio - Bombeiro');
+INSERT INTO DESPESA VALUES(14, false, 'Água');
+INSERT INTO DESPESA VALUES(16, false, 'Gás');
+INSERT INTO DESPESA VALUES(17, true, 'Seguro Lar');
+INSERT INTO DESPESA VALUES(19, false, 'Telefone Celular');
+INSERT INTO DESPESA VALUES(20, false, 'Cartão de Crédito');
+INSERT INTO DESPESA VALUES(21, false,  'Cheque Especial/Débito Bancário');
+INSERT INTO DESPESA VALUES(22, true, 'Empregada Doméstica');
+INSERT INTO DESPESA VALUES(23, true, 'Babá');
+INSERT INTO DESPESA VALUES(24, true, 'Tv a Cabo');
+INSERT INTO DESPESA VALUES(25, true, 'Internet');
+INSERT INTO DESPESA VALUES(26, false, 'Lazer');
+INSERT INTO DESPESA VALUES(27, true, 'Academia');
+INSERT INTO DESPESA VALUES(28, false, 'Supermercado');
+INSERT INTO DESPESA VALUES(29, true, 'Educação');
+INSERT INTO DESPESA VALUES(30, true, 'Creche');
+INSERT INTO DESPESA VALUES(31, true, 'Transporte');
+INSERT INTO DESPESA VALUES(32, false, 'Vestuário');
+INSERT INTO DESPESA VALUES(33, true, 'Cursos');
+INSERT INTO DESPESA VALUES(34, false, 'Saúde');
 RECEITAS
 
 INSERT INTO receita VALUES (1, ' Salário1');

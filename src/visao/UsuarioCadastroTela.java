@@ -243,7 +243,8 @@ public class UsuarioCadastroTela extends JDialog {
 				|| confiSenha.trim().equals("")){
 			return null;
 			//
-		}else if(!senhaUsu.equals(confiSenha)){
+		}
+		else if(!senhaUsu.equals(confiSenha)){
 			JOptionPane.showMessageDialog(null, "Senhas não conferem");
 			throw new SenhaException("Senhas não conferem");
 		}

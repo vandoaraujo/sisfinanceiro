@@ -163,6 +163,8 @@ public class ControlaSisFinanceiro implements ActionListener {
 	    System.out.println("MES " + p.getMes());
 	    System.out.println("ano " + p.getAno());
 	    
+	    PeriodoTelaControle.getInstance().periodoAtualSelecionado = p;
+	    
 	    return p;
 		
 	}

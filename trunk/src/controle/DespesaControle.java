@@ -3,13 +3,11 @@ package controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.jar.JarInputStream;
 
 import javax.swing.JOptionPane;
 
-import org.hibernate.ObjectNotFoundException;
-
 import modelo.Despesa;
+import modelo.DespesaUsuarioPeriodo;
 import visao.DespesaTela;
 import dao.DespesaDao;
 import dao.DespesaPertenceUsuarioEmPeriodoDao;
@@ -66,6 +64,7 @@ public class DespesaControle implements ActionListener {
 				vc.limpaDespesas();
 				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
 				vc.carregaAreaDespesas(novasDespesas);
+				JOptionPane.showMessageDialog(null,"Despesa inserida com sucesso!");
 			}
 			//Para o caso de atualizar
 			else{
@@ -76,6 +75,8 @@ public class DespesaControle implements ActionListener {
 				List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
 				vc.carregaAreaDespesas(novasDespesas);
 				despesaCorrente = null;
+				JOptionPane.showMessageDialog(null,"Despesa atualizada com sucesso!");
+
 			}
 			
 		}
@@ -89,32 +90,24 @@ public class DespesaControle implements ActionListener {
 						vc.limpaDespesas();
 						List<Despesa> novasDespesas = DespesaDao.getInstance().listar();
 						vc.carregaAreaDespesas(novasDespesas);
-						JOptionPane.showMessageDialog(null,"Deletado com sucesso");
+						JOptionPane.showMessageDialog(null,"Despesa excluída com sucesso");
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Esta despesa já foi utilizada e não pode ser deletada!");
 				}
 			}
-				despesaCorrente = null;
+			
+			despesaCorrente = null;
 		}
 
 	}
 
 	private boolean validaUtilizacaoDespesa(Despesa despesaCorrente2) {
-		List<Despesa> d = DespesaPertenceUsuarioEmPeriodoDao.getInstance().buscaDespesaId(despesaCorrente2.getId());
+		List<DespesaUsuarioPeriodo> d = DespesaPertenceUsuarioEmPeriodoDao.getInstance().buscaDespesaId(despesaCorrente2.getId());
 		if(d.size() == 0){
 			return true;
 		}
 		return false;
-	}
-
-	private void analisaMudancaObjetoDespesa(Despesa d) {
-		Despesa despesaTela = vc.leDadosTelaCadastro();
-		if(despesaTela.getNomeDespesa().equals(d.getNomeDespesa()) || 
-				(despesaTela.isDespesaFixa() == d.isDespesaFixa())) {
-			
-		}
-		
 	}
 
 	private Despesa alteraDespesa() {

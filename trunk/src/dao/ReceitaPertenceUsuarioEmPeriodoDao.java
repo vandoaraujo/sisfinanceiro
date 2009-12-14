@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.List;
+
+import modelo.DespesaUsuarioPeriodo;
 import modelo.ReceitaUsuarioPeriodo;
 
 import org.apache.log4j.Logger;
@@ -30,6 +33,15 @@ public class ReceitaPertenceUsuarioEmPeriodoDao {
     	session.close();
 
     }
+    
+	public List<ReceitaUsuarioPeriodo> buscaReceitaId(Integer id) {
+
+    	List<ReceitaUsuarioPeriodo> rec = session
+		.createQuery(
+			"from modelo.ReceitaUsuarioPeriodo d where d.chaveComposta.receita_id=:idReceita")
+			.setInteger("idReceita", id).list();
+		return rec;
+	}
 
 
 }

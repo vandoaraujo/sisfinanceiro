@@ -134,26 +134,5 @@ public class PeriodoDao {
     			.setInteger("idPeriodo", p.getId()).setInteger("idUsuario", usu.getId()).list();
     		return rec;
 		}
-	    
-	/*	Iterator proxIdAtendimento = AtendimentoDao.getInstance()
-		.listaUltimoId();
-	
-	    public Iterator listaUltimoId() {
-
-	    	Iterator it =session.createQuery(
-	    		"select atendimento_numero ,max(id) from Atendimento").list().iterator();
-	    	return it;
-	        }	
-		
-	if (proxIdAtendimento.hasNext() == false) {
-	    maior=1;
-	    logger.info("Setou o próximo atendimento como 1 ");
-	    
-	} else {
-	    Object[] linhas = (Object[]) proxIdAtendimento.next();
-	    numero = (Integer) linhas[0];
-	    maior =(Integer) linhas[1];
-	    anoUltimoAtendimento = Integer.toString(numero).substring(0, 4);
-	    logger.info("Ano Ultimo Atendimento " + anoUltimoAtendimento);*/
 
 }

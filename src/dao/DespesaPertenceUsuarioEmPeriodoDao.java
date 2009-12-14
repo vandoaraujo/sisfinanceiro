@@ -4,7 +4,6 @@ import java.util.List;
 
 import modelo.Despesa;
 import modelo.DespesaUsuarioPeriodo;
-import modelo.OBM;
 import modelo.Periodo;
 import modelo.Usuario;
 
@@ -38,9 +37,9 @@ public class DespesaPertenceUsuarioEmPeriodoDao {
 
     }
     
-	public List<Despesa> buscaDespesaId(Integer id) {
+	public List<DespesaUsuarioPeriodo> buscaDespesaId(Integer id) {
 
-    	List<Despesa> des = session
+    	List<DespesaUsuarioPeriodo> des = session
 		.createQuery(
 			"from modelo.DespesaUsuarioPeriodo d where d.chaveComposta.despesa_id=:idDespesa")
 			.setInteger("idDespesa", id).list();

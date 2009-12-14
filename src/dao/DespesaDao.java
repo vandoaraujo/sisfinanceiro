@@ -65,7 +65,7 @@ public class DespesaDao {
 	    }
 
 	    public List<Despesa> listar() {
-			List<Despesa> l = session.createQuery("from modelo.Despesa").list();
+			List<Despesa> l = session.createQuery("from modelo.Despesa order by nomeDespesa").list();
 			return l;
 	    }
 

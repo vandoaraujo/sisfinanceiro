@@ -8,10 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import dao.DespesaDao;
+import dao.DespesaPertenceUsuarioEmPeriodoDao;
 import dao.ReceitaDao;
+import dao.ReceitaPertenceUsuarioEmPeriodoDao;
 
 import modelo.Despesa;
+import modelo.DespesaUsuarioPeriodo;
 import modelo.Receita;
+import modelo.ReceitaUsuarioPeriodo;
 
 import visao.ReceitaTela;
 
@@ -67,6 +71,8 @@ public class ReceitaControle implements ActionListener{
 				vc.limpaReceitas();
 				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
 				vc.carregaAreaReceitas(novasReceitas);
+				JOptionPane.showMessageDialog(null,"Receita inserida com sucesso!");
+
 			}
 			//Para o caso de atualizar
 			else{
@@ -77,6 +83,8 @@ public class ReceitaControle implements ActionListener{
 				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
 				vc.carregaAreaReceitas(novasReceitas);
 				receitaCorrente = null;
+				JOptionPane.showMessageDialog(null,"Receita atualizada com sucesso!");
+
 			}
 			
 		}
@@ -84,20 +92,29 @@ public class ReceitaControle implements ActionListener{
 		else if(comando.equals("excluir")){
 			
 			if(receitaCorrente != null){
-				ReceitaDao.getInstance().deletar(receitaCorrente);
-				vc.limpaReceitas();
-				List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
-				vc.carregaAreaReceitas(novasReceitas);
-				JOptionPane.showMessageDialog(null,"Deletado com sucesso");
+				if(validaUtilizacaoReceita(receitaCorrente)){
+					ReceitaDao.getInstance().deletar(receitaCorrente);
+					vc.limpaReceitas();
+					List<Receita> novasReceitas = ReceitaDao.getInstance().listar();
+					vc.carregaAreaReceitas(novasReceitas);
+					JOptionPane.showMessageDialog(null,"Receita excluída com sucesso!");
+					
+				}else{
+					JOptionPane.showMessageDialog(null,"Esta receita já foi utilizada e não pode ser excluida!");
+
+				}
 				
 			}
 				receitaCorrente = null;
 		}
 	}
 	
-	private void analisaMudancaObjetoReceita(Receita r) {
-		
-		Receita receitaTela = vc.leDadosTelaCadastro();
+	private boolean validaUtilizacaoReceita(Receita receitaCorrente) {
+		List<ReceitaUsuarioPeriodo> r = ReceitaPertenceUsuarioEmPeriodoDao.getInstance().buscaReceitaId(receitaCorrente.getId());
+		if(r.size() == 0){
+			return true;
+		}
+		return false;
 	}
 	
 	private Receita alteraReceita() {

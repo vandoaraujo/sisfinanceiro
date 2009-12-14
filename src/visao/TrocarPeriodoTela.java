@@ -116,24 +116,6 @@ public class TrocarPeriodoTela extends JDialog{
 		return p;
 	}
 	
-	/*public Usuario leDadosUsuario(){
-		try{
-			String nomeUsuario= nome.getText();
-			
-			String loginUsuario=login.getText();
-			
-			String senhaUsu=new String(senha.getPassword());
-			
-			Usuario usuario=new Usuario(nomeUsuario,loginUsuario,senhaUsu,new Date());
-			
-			return usuario;
-		}
-		catch(Exception e){
-			JOptionPane.showMessageDialog(null, "Dados invalidos!");
-		}
-		return null;
-	}*/
-	
 	public void modofechado(){
 		this.setVisible(false);
 	}
